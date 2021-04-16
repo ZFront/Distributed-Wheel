@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>demo/test-demo</module>
+        <module>service/service-lock</module>
+        <module>service/service-timer</module>
+        <module>service/service-unique</module>
+        <module>api/api-gateway</module>
+    </modules>
+
+    <groupId>com.wheel</groupId>
+    <artifactId>spring-wheel</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <description>wheel</description>
+
+    <!-- 项目配置 -->
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!--版本控制-->
+        <project.version>1.0-SNAPSHOT</project.version>
+
+        <!--springboot-->
+        <springboot.version>2.2.5.RELEASE</springboot.version>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+
+        <!-- db相关 -->
+        <pagehelper-starter.version>1.2.13</pagehelper-starter.version>
+        <mybatis-starter.version>2.1.1</mybatis-starter.version>
+        <mybatis.version>3.5.3</mybatis.version>
+        <mybatis-spring.version>2.0.3</mybatis-spring.version>
+        <druid-starter.version>1.1.21</druid-starter.version>
+        <druid.version>1.1.21</druid.version>
+        <mysql-connector.version>5.1.48</mysql-connector.version>
+
+        <!-- dubbo -->
+        <dubbo.version>2.7.6</dubbo.version>
+
+        <!--中间件-->
+        <rocketmq.version>2.1.0</rocketmq.version>
+        <lombok.version>1.18.8</lombok.version>
+        <quartz.version>2.3.2</quartz.version>
+        <redisson.version>3.12.3</redisson.version>
+
+        <!--三方工具-->
+        <commons-io.version>2.6</commons-io.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <fastjson.version>1.2.67</fastjson.version>
+        <guava.version>28.1-jre</guava.version>
+        <curator.version>4.3.0</curator.version>
+        <perf4j.version>0.9.16</perf4j.version>
+
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- dubbo starter start -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+            </dependency>
+            <!-- dubbo end  -->
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <!--Mybatis 分页插件 pagehelper -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-starter.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-autoconfigure</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+
+
+            <!-- redis相关-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${springboot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.lettuce</groupId>
+                        <artifactId>lettuce-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- rocketmq -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+
+            <!-- quartz -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--第三方工具包-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.perf4j</groupId>
+                <artifactId>perf4j</artifactId>
+                <version>${perf4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <!--配置生成源码包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

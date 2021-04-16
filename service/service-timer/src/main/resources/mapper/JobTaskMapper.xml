@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.wheel.timer.entity.JobTask">
+	<sql id="table"> tbl_job_task </sql>
+
+	<!-- 用于返回的bean对象 -->
+	<resultMap id="BaseResultMap" type="com.wheel.timer.entity.JobTask">
+		<result column="ID" property="id" jdbcType="BIGINT"/>
+		<result column="VERSION" property="version" jdbcType="BIGINT"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+		<result column="JOB_TYPE" property="jobType" jdbcType="SMALLINT"/>
+		<result column="DESTINATION" property="destination" jdbcType="VARCHAR"/>
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP"/>
+		<result column="INTERVALS" property="intervals" jdbcType="INTEGER"/>
+		<result column="INTERVAL_UNIT" property="intervalUnit" jdbcType="SMALLINT"/>
+		<result column="REPEAT_TIMES" property="repeatTimes" jdbcType="INTEGER"/>
+		<result column="CRON_EXPRESSION" property="cronExpression" jdbcType="VARCHAR"/>
+		<result column="JOB_DESC" property="jobDesc" jdbcType="VARCHAR"/>
+		<result column="LAST_EXECUTE_TIME" property="lastExecuteTime" jdbcType="TIMESTAMP"/>
+		<result column="NEXT_EXECUTE_TIME" property="nextExecuteTime" jdbcType="TIMESTAMP"/>
+		<result column="EXECUTED_TIMES" property="executedTimes" jdbcType="BIGINT"/>
+		<result column="JOB_STATUS" property="jobStatus" jdbcType="CHAR"/>
+		<result column="PARAM_JSON" property="paramJson" jdbcType="OTHER"/>
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+		ID,
+		VERSION,
+		CREATE_TIME,
+		JOB_NAME,
+		JOB_TYPE,
+		DESTINATION,
+		START_TIME,
+		END_TIME,
+		INTERVALS,
+		INTERVAL_UNIT,
+		REPEAT_TIMES,
+		CRON_EXPRESSION,
+		JOB_DESC,
+		LAST_EXECUTE_TIME,
+		NEXT_EXECUTE_TIME,
+		EXECUTED_TIMES,
+		JOB_STATUS,
+		PARAM_JSON
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.wheel.timer.entity.JobTask">
+		INSERT INTO <include refid="table" /> (
+		VERSION,
+		CREATE_TIME,
+		JOB_NAME,
+		JOB_TYPE,
+		DESTINATION,
+		START_TIME,
+		END_TIME,
+		INTERVALS,
+		INTERVAL_UNIT,
+		REPEAT_TIMES,
+		CRON_EXPRESSION,
+		JOB_DESC,
+		LAST_EXECUTE_TIME,
+		NEXT_EXECUTE_TIME,
+		EXECUTED_TIMES,
+		JOB_STATUS,
+		PARAM_JSON
+		) VALUES (
+		0,
+		#{createTime,jdbcType=TIMESTAMP},
+		#{jobName,jdbcType=VARCHAR},
+		#{jobType,jdbcType=SMALLINT},
+		#{destination,jdbcType=VARCHAR},
+		#{startTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP},
+		#{intervals,jdbcType=INTEGER},
+		#{intervalUnit,jdbcType=SMALLINT},
+		#{repeatTimes,jdbcType=INTEGER},
+		#{cronExpression,jdbcType=VARCHAR},
+		#{jobDesc,jdbcType=VARCHAR},
+		#{lastExecuteTime,jdbcType=TIMESTAMP},
+		#{nextExecuteTime,jdbcType=TIMESTAMP},
+		#{executedTimes,jdbcType=BIGINT},
+		#{jobStatus,jdbcType=CHAR},
+		#{paramJson,jdbcType=OTHER}
+		)
+	</insert>
+
+	<!-- 批量插入记录 -->
+	<insert id="batchInsert" useGeneratedKeys="true" keyProperty="id" parameterType="list">
+		INSERT INTO <include refid="table" /> (
+		VERSION,
+		CREATE_TIME,
+		JOB_NAME,
+		JOB_TYPE,
+		DESTINATION,
+		START_TIME,
+		END_TIME,
+		INTERVALS,
+		INTERVAL_UNIT,
+		REPEAT_TIMES,
+		CRON_EXPRESSION,
+		JOB_DESC,
+		LAST_EXECUTE_TIME,
+		NEXT_EXECUTE_TIME,
+		EXECUTED_TIMES,
+		JOB_STATUS,
+		PARAM_JSON
+		) VALUES
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			0,
+			#{item.createTime,jdbcType=TIMESTAMP},
+			#{item.jobGroup,jdbcType=VARCHAR},
+			#{item.jobName,jdbcType=VARCHAR},
+			#{item.jobType,jdbcType=SMALLINT},
+			#{item.destination,jdbcType=VARCHAR},
+			#{item.startTime,jdbcType=TIMESTAMP},
+			#{item.endTime,jdbcType=TIMESTAMP},
+			#{item.intervals,jdbcType=INTEGER},
+			#{item.intervalUnit,jdbcType=SMALLINT},
+			#{item.repeatTimes,jdbcType=INTEGER},
+			#{item.cronExpression,jdbcType=VARCHAR},
+			#{item.jobDesc,jdbcType=VARCHAR},
+			#{item.lastExecuteTime,jdbcType=TIMESTAMP},
+			#{item.nextExecuteTime,jdbcType=TIMESTAMP},
+			#{item.executedTimes,jdbcType=BIGINT},
+			#{item.jobStatus,jdbcType=CHAR},
+			#{item.paramJson,jdbcType=OTHER}
+		</foreach>
+	</insert>
+
+	<!--更新-->
+	<update id="update" parameterType="com.wheel.timer.entity.JobTask">
+		UPDATE <include refid="table" />
+		<set>
+			VERSION = #{version,jdbcType=BIGINT} + 1,
+			CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			JOB_NAME = #{jobName,jdbcType=VARCHAR},
+			JOB_TYPE = #{jobType,jdbcType=SMALLINT},
+			DESTINATION = #{destination,jdbcType=VARCHAR},
+			START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			INTERVALS = #{intervals,jdbcType=INTEGER},
+			INTERVAL_UNIT = #{intervalUnit,jdbcType=SMALLINT},
+			REPEAT_TIMES = #{repeatTimes,jdbcType=INTEGER},
+			CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+			JOB_DESC = #{jobDesc,jdbcType=VARCHAR},
+			LAST_EXECUTE_TIME = #{lastExecuteTime,jdbcType=TIMESTAMP},
+			NEXT_EXECUTE_TIME = #{nextExecuteTime,jdbcType=TIMESTAMP},
+			EXECUTED_TIMES = #{executedTimes,jdbcType=BIGINT},
+			JOB_STATUS = #{jobStatus,jdbcType=CHAR},
+			PARAM_JSON = #{paramJson,jdbcType=OTHER}
+		</set>
+		WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+	</update>
+
+	<!-- 只更新不为null的属性 -->
+	<update id="updateIfNotNull" parameterType="com.wheel.timer.entity.JobTask">
+		UPDATE <include refid="table" />
+		<set>
+			VERSION = #{version,jdbcType=BIGINT} + 1,
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jobName != null">
+				JOB_NAME = #{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="jobType != null">
+				JOB_TYPE = #{jobType,jdbcType=SMALLINT},
+			</if>
+			<if test="destination != null">
+				DESTINATION = #{destination,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="intervals != null">
+				INTERVALS = #{intervals,jdbcType=INTEGER},
+			</if>
+			<if test="intervalUnit != null">
+				INTERVAL_UNIT = #{intervalUnit,jdbcType=SMALLINT},
+			</if>
+			<if test="repeatTimes != null">
+				REPEAT_TIMES = #{repeatTimes,jdbcType=INTEGER},
+			</if>
+			<if test="cronExpression != null">
+				CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+			</if>
+			<if test="jobDesc != null">
+				JOB_DESC = #{jobDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="lastExecuteTime != null">
+				LAST_EXECUTE_TIME = #{lastExecuteTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="nextExecuteTime != null">
+				NEXT_EXECUTE_TIME = #{nextExecuteTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="executedTimes != null">
+				EXECUTED_TIMES = #{executedTimes,jdbcType=BIGINT},
+			</if>
+			<if test="jobStatus != null">
+				JOB_STATUS = #{jobStatus,jdbcType=CHAR},
+			</if>
+			<if test="paramJson != null">
+				PARAM_JSON = #{paramJson,jdbcType=OTHER}
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+	</update>
+
+	<!-- 多条件组合查询 -->
+	<select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		<choose>
+			<when test="sortColumns != null and sortColumns !='' ">
+				<![CDATA[ ORDER BY ${sortColumns} ]]>
+			</when>
+			<otherwise>
+				<![CDATA[ ORDER BY ID DESC ]]>
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		<choose>
+			<when test="sortColumns != null and sortColumns !='' ">
+				<![CDATA[ ORDER BY ${sortColumns} ]]>
+			</when>
+			<otherwise>
+				<![CDATA[ ORDER BY ID DESC ]]>
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 计算总记录数 -->
+	<select id="countBy" parameterType="java.util.Map" resultType="long">
+		SELECT count(ID) FROM
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<!--按查询条件删除-->
+	<delete id="deleteBy">
+		DELETE FROM <include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</delete>
+
+	<!-- 根据多个id查询 -->
+	<select id="listByIdList" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM <include refid="table" />
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+	</select>
+
+	<!-- 根据id查询 -->
+	<select id="getById" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM <include refid="table" />
+		WHERE ID = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--按id主键删除-->
+	<delete id="deleteById">
+		DELETE FROM <include refid="table" /> WHERE ID = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!--按多个id主键删除-->
+	<select id="deleteByIdList" parameterType="list">
+		SELECT <include refid="Base_Column_List" />
+		FROM <include refid="table" />
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+	</select>
+
+	<!-- ↑↑↑↑↑↑ 如果有新增字段、删除字段、修改字段 以上内容可用模板生成新内容后直接替换 ↑↑↑↑↑↑ -->
+	<!-- ↓↓↓↓↓↓ 以下内容是根据需求手动添加或修改的，请勿使用模板内容直接覆盖 ↓↓↓↓↓↓ -->
+
+	<sql id="condition_sql">
+		<if test="id != null ">
+			AND ID = #{id,jdbcType=BIGINT}
+		</if>
+		<if test="idList != null and idList.size() > 0">
+			AND ID IN <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+		</if>
+		<if test="version != null ">
+			AND VERSION = #{version,jdbcType=BIGINT}
+		</if>
+		<if test="createTime != null ">
+			AND CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="jobName != null and jobName !='' ">
+			AND JOB_NAME = #{jobName,jdbcType=VARCHAR}
+		</if>
+		<if test="jobType != null ">
+			AND JOB_TYPE = #{jobType,jdbcType=SMALLINT}
+		</if>
+		<if test="destination != null and destination !='' ">
+			AND DESTINATION = #{destination,jdbcType=VARCHAR}
+		</if>
+		<if test="startTime != null ">
+			AND START_TIME = #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null ">
+			AND END_TIME = #{endTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="intervals != null ">
+			AND INTERVALS = #{intervals,jdbcType=INTEGER}
+		</if>
+		<if test="intervalUnit != null ">
+			AND INTERVAL_UNIT = #{intervalUnit,jdbcType=SMALLINT}
+		</if>
+		<if test="repeatTimes != null ">
+			AND REPEAT_TIMES = #{repeatTimes,jdbcType=INTEGER}
+		</if>
+		<if test="cronExpression != null and cronExpression !='' ">
+			AND CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR}
+		</if>
+		<if test="jobDesc!= null and jobDesc !='' ">
+			AND JOB_DESC like CONCAT('%', #{jobDesc}, '%')
+		</if>
+		<if test="lastExecuteTime != null ">
+			AND LAST_EXECUTE_TIME = #{lastExecuteTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="nextExecuteTime != null ">
+			AND NEXT_EXECUTE_TIME = #{nextExecuteTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="executedTimes != null ">
+			AND EXECUTED_TIMES = #{executedTimes,jdbcType=BIGINT}
+		</if>
+		<if test="jobStatus != null and jobStatus !='' ">
+			AND JOB_STATUS = #{jobStatus,jdbcType=CHAR}
+		</if>
+		<if test="paramJson != null and paramJson !='' ">
+			AND PARAM_JSON = #{paramJson,jdbcType=OTHER}
+		</if>
+	</sql>
+</mapper>
+

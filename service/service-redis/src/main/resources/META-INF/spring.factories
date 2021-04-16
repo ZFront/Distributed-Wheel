@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wheel.redis.config.RedisConfig,\
+com.wheel.redis.config.RedisLimiterConfig

@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wheel.lock.config.ZKAutoConfig,\
+com.wheel.lock.config.RedissonAutoConfig

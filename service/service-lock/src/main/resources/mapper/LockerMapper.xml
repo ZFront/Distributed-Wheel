@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wheel.lock.entity.Locker">
+    <sql id="table"> tbl_locker </sql>
+
+    <!-- 用于返回的bean对象 -->
+    <resultMap id="BaseResultMap" type="com.wheel.lock.entity.Locker">
+        <result column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="VERSION" property="version" jdbcType="BIGINT"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="RESOURCE_ID" property="resourceId" jdbcType="CHAR"/>
+        <result column="RESOURCE_STATUS" property="resourceStatus" jdbcType="SMALLINT"/>
+        <result column="CLIENT_LOCK_ID" property="clientLockId" jdbcType="VARCHAR"/>
+        <result column="CLIENT_FLAG" property="clientFlag" jdbcType="VARCHAR"/>
+        <result column="LOCK_TIME" property="lockTime" jdbcType="TIMESTAMP"/>
+        <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="Base_Column_List">
+        ID,
+		VERSION,
+		CREATE_TIME,
+		RESOURCE_ID,
+		RESOURCE_STATUS,
+		CLIENT_LOCK_ID,
+		CLIENT_FLAG,
+		LOCK_TIME,
+		EXPIRE_TIME
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.wheel.lock.entity.Locker">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        VERSION ,
+        CREATE_TIME ,
+        RESOURCE_ID ,
+        RESOURCE_STATUS ,
+        CLIENT_LOCK_ID ,
+        CLIENT_FLAG ,
+        LOCK_TIME ,
+        EXPIRE_TIME
+        ) VALUES (
+        0,
+        #{createTime,jdbcType=TIMESTAMP},
+        #{resourceId,jdbcType=CHAR},
+        #{resourceStatus,jdbcType=SMALLINT},
+        #{clientLockId,jdbcType=VARCHAR},
+        #{clientFlag,jdbcType=VARCHAR},
+        #{lockTime,jdbcType=TIMESTAMP},
+        #{expireTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!-- 批量插入记录 -->
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id" parameterType="list">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        VERSION,
+        CREATE_TIME,
+        RESOURCE_ID,
+        RESOURCE_STATUS,
+        CLIENT_LOCK_ID,
+        CLIENT_FLAG,
+        LOCK_TIME,
+        EXPIRE_TIME
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            0,
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.resourceId,jdbcType=CHAR},
+            #{item.resourceStatus,jdbcType=SMALLINT},
+            #{item.clientLockId,jdbcType=VARCHAR},
+            #{item.clientFlag,jdbcType=VARCHAR},
+            #{item.lockTime,jdbcType=TIMESTAMP},
+            #{item.expireTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--更新-->
+    <update id="update" parameterType="com.wheel.lock.entity.Locker">
+        UPDATE
+        <include refid="table"/>
+        SET
+        VERSION = #{version,jdbcType=BIGINT} + 1,
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        RESOURCE_ID = #{resourceId,jdbcType=CHAR},
+        RESOURCE_STATUS = #{resourceStatus,jdbcType=SMALLINT},
+        CLIENT_LOCK_ID = #{clientLockId,jdbcType=VARCHAR},
+        CLIENT_FLAG = #{clientFlag,jdbcType=VARCHAR},
+        LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP},
+        EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP}
+        WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+    </update>
+
+    <!-- 只更新不为null的属性 -->
+    <update id="updateIfNotNull" parameterType="com.wheel.lock.entity.Locker">
+        UPDATE
+        <include refid="table"/>
+        <set>
+            VERSION = #{version,jdbcType=BIGINT} +1,
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resourceId != null">
+                RESOURCE_ID = #{resourceId,jdbcType=CHAR},
+            </if>
+            <if test="resourceStatus != null">
+                RESOURCE_STATUS = #{resourceStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="clientLockId != null">
+                CLIENT_LOCK_ID = #{clientLockId,jdbcType=VARCHAR},
+            </if>
+            <if test="clientFlag != null">
+                CLIENT_FLAG = #{clientFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="lockTime != null">
+                LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+    </update>
+
+    <!-- 多条件组合查询 -->
+    <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        <choose>
+            <when test="sortColumns != null and sortColumns !='' ">
+                <![CDATA[ ORDER BY #{sortColumns} ]]>
+            </when>
+            <otherwise>
+                <![CDATA[ ORDER BY ID DESC ]]>
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 计算总记录数 -->
+    <select id="countBy" parameterType="java.util.Map" resultType="long">
+        select count(ID) from
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
+
+    <!--按查询条件删除-->
+    <delete id="deleteBy">
+        DELETE FROM
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </delete>
+
+    <!-- 根据多个id查询 -->
+    <select id="listByIdList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        WHERE ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+    </select>
+
+    <!-- 根据id查询 -->
+    <select id="getById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        WHERE ID = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--按id主键删除-->
+    <delete id="deleteById">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE ID = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <!--按多个id主键删除-->
+    <delete id="deleteByIdList" parameterType="list">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <!-- ↑↑↑↑↑↑ 如果有新增字段、删除字段、修改字段 以上内容可用模板生成新内容后直接替换 ↑↑↑↑↑↑ -->
+    <!-- ↓↓↓↓↓↓ 以下内容是根据需求手动添加或修改的，请勿使用模板内容直接覆盖 ↓↓↓↓↓↓ -->
+
+    <sql id="condition_sql">
+        <if test="id != null">
+            and ID = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="idList != null and idList.size() > 0">
+            AND ID IN
+            <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">#{item,jdbcType=BIGINT}</foreach>
+        </if>
+        <if test="createTime != null">
+            and CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="resourceId != null and resourceId !=''">
+            and RESOURCE_ID = #{resourceId,jdbcType=CHAR}
+        </if>
+        <if test="resourceStatus != null">
+            and RESOURCE_STATUS = #{resourceStatus,jdbcType=SMALLINT}
+        </if>
+        <if test="clientLockId != null and clientLockId !=''">
+            and CLIENT_LOCK_ID = #{clientLockId,jdbcType=VARCHAR}
+        </if>
+        <if test="clientFlag != null and clientFlag !=''">
+            and CLIENT_FLAG = #{clientFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="lockTime != null">
+            and LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="expireTime != null">
+            and EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="getByResourceId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        WHERE RESOURCE_ID = #{resourceId,jdbcType=CHAR}
+    </select>
+</mapper>
+

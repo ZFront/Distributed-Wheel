@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wheel.mq.config.AmqAutoConfig,\
+com.wheel.mq.config.AmqMonitorConfig
