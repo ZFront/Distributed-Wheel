@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @desc
  * @author: zhouf
@@ -22,12 +25,17 @@ public class TsLimiter {
 
     @Test
     public void testRedisLimit() {
-        for (int i = 0; i < 100; i++) {
-            if (!redisLimiter.tryAcquire("testLimiter", 1, 2)) {
-                System.out.println("服务器繁忙");
-            } else {
-                System.out.println("get job");
-            }
+
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
+
+        for (int i = 0; i < 50; i++) {
+            executorService.submit(() -> {
+                if (!redisLimiter.tryAcquire("testLimiter", 5, 10)) {
+                    System.out.println("服务器繁忙");
+                } else {
+                    System.out.println("get job");
+                }
+            });
         }
     }
 

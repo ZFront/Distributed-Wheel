@@ -26,7 +26,7 @@ public class RedisLimiter {
      *
      * @param key  请求key
      * @param rate 每秒生成多少令牌
-     * @param max  最大容量
+     * @param max  最大容量， 超过这个容量才会进行限制
      * @return
      */
     public boolean tryAcquire(String key, int rate, int max) {

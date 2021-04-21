@@ -1,9 +1,11 @@
 package com.wheel.lock.config;
 
 import com.wheel.lock.core.RedissonClientFactory;
+import com.wheel.lock.extend.WRedissonRateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +27,11 @@ public class RedissonAutoConfig {
     @ConditionalOnMissingBean(RedissonClient.class)
     public RedissonClient createSentinel() {
         return RedissonClientFactory.init(redisProp);
+    }
+
+    @Bean
+    @ConditionalOnBean(RedissonClient.class)
+    public WRedissonRateLimiter redissonRateLimiter(RedissonClient redissonClient) {
+        return new WRedissonRateLimiter(redissonClient);
     }
 }
