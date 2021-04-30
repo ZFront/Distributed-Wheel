@@ -1,0 +1,36 @@
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*/**.iml
+*rebel*.xml
+*.iws
+dependency-reduced-pom.xml
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# else
+.springBeans
+/bin
+.git/
+node_modules
+
+log
