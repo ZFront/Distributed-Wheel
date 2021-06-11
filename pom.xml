@@ -13,6 +13,8 @@
         <module>api/api-gateway</module>
         <module>learn/rpc-client</module>
         <module>learn/rpc-server</module>
+        <module>java-basis</module>
+        <module>learn/untitled</module>
     </modules>
 
     <groupId>com.wheel</groupId>
