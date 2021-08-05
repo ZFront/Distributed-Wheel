@@ -2,25 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>1.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>demo/test-demo</module>
-        <module>service/service-lock</module>
-        <module>service/service-timer</module>
-        <module>service/service-unique</module>
-        <module>api/api-gateway</module>
-        <module>learn/rpc-client</module>
-        <module>learn/rpc-server</module>
-        <module>java-basis</module>
-        <module>learn/untitled</module>
-    </modules>
-
     <groupId>com.wheel</groupId>
-    <artifactId>spring-wheel</artifactId>
+    <artifactId>common-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>wheel</description>
 
     <!-- 项目配置 -->
     <properties>
@@ -42,7 +29,7 @@
         <mybatis-spring.version>2.0.3</mybatis-spring.version>
         <druid-starter.version>1.1.21</druid-starter.version>
         <druid.version>1.1.21</druid.version>
-        <mysql-connector.version>5.1.48</mysql-connector.version>
+        <mysql-connector.version>8.0.16</mysql-connector.version>
 
         <!-- dubbo -->
         <dubbo.version>2.7.6</dubbo.version>
@@ -52,6 +39,7 @@
         <lombok.version>1.18.8</lombok.version>
         <quartz.version>2.3.2</quartz.version>
         <redisson.version>3.12.3</redisson.version>
+        <shardingsphere.version>4.1.1</shardingsphere.version>
 
         <!--三方工具-->
         <commons-io.version>2.6</commons-io.version>
@@ -60,6 +48,7 @@
         <guava.version>28.1-jre</guava.version>
         <curator.version>4.3.0</curator.version>
         <perf4j.version>0.9.16</perf4j.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
 
     </properties>
 
@@ -151,7 +140,11 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
 
             <!-- redis相关-->
             <dependency>
@@ -238,6 +231,11 @@
                 <groupId>org.perf4j</groupId>
                 <artifactId>perf4j</artifactId>
                 <version>${perf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

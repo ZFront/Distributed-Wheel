@@ -15,6 +15,7 @@ import java.util.Set;
 /**
  * @description redis操作类
  * 目前只支持哨兵模式，暂不支持集群模式
+ * {@link https://wizardforcel.gitbooks.io/redis-doc/content/ref/15.html} 相关操作说明文档
  * @author: zhouf
  * @date: 2020/6/1
  */
@@ -37,6 +38,8 @@ public class RedisClient {
         return (JedisConnection) connectionFactory.getConnection();
     }
 
+    // ========================= Key 操作 start ==============================
+
     /**
      * 判断key键是否存在
      *
@@ -51,6 +54,19 @@ public class RedisClient {
             conn.close();
         }
     }
+
+    public boolean del(String key) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().del(key) >= 0;
+        } finally {
+            conn.close();
+        }
+    }
+
+    // ========================= Key 操作 end ==============================
+
+    // ========================= String 操作 start ==============================
 
     /**
      * 获取Key的值
@@ -119,6 +135,19 @@ public class RedisClient {
         }
     }
 
+    public long incrBy(String key, int incrStep) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            Long id = conn.getJedis().incrBy(key, incrStep);
+            return id;
+        } finally {
+            conn.close();
+        }
+    }
+
+    // ========================= String 操作 end ==============================
+
+    // ========================= Hash 操作 start ==============================
 
     /**
      * redis服务端指令：
@@ -147,15 +176,6 @@ public class RedisClient {
         }
     }
 
-    public boolean del(String key) {
-        JedisConnection conn = getJedisConnection();
-        try {
-            return conn.getJedis().del(key) >= 0;
-        } finally {
-            conn.close();
-        }
-    }
-
     public boolean hdel(String key, String field) {
         JedisConnection conn = getJedisConnection();
         try {
@@ -165,15 +185,9 @@ public class RedisClient {
         }
     }
 
-    public long incrBy(String key, int incrStep) {
-        JedisConnection conn = getJedisConnection();
-        try {
-            Long id = conn.getJedis().incrBy(key, incrStep);
-            return id;
-        } finally {
-            conn.close();
-        }
-    }
+    // ========================= Hash 操作 end ==============================
+
+    // ========================= 扩展写法 start ==============================
 
     /**
      * 获得循环的递增Id
@@ -220,6 +234,9 @@ public class RedisClient {
         Long id = eval(script, Collections.singletonList(key), args);
         return id;
     }
+    // ========================= 扩展写法 end ==============================
+
+    // ========================= Script操作 start ==============================
 
     /**
      * 求值计算
@@ -253,6 +270,9 @@ public class RedisClient {
             conn.close();
         }
     }
+    // ========================= Script操作 end ==============================
+
+    // ========================= SortedSet操作 start ==============================
 
     /**
      * 增加对应的元素
@@ -382,5 +402,101 @@ public class RedisClient {
             conn.close();
         }
     }
+    // ========================= SortedSet操作 end ==============================
 
+    // ========================= List操作 start ==============================
+
+    /**
+     * 虽然可以通过：rpush/lpop：实现队列 （先进先出）； rpush/rpop 实现栈 （先进后出）
+     * <p>
+     * 但是从目前来说，没有特别适合的业务应用场景。如果redis来做队列，则必然会存在消息丢失的问题。
+     * 虽然可以采取一系列的补偿错失，但未免来说有点得不偿失，还不如采用其他高可用的消息队列，如RocketMQ。
+     */
+    // ========================= List操作 end ================================
+
+    // ========================= Set操作 start ==============================
+    public boolean sadd(String key, String value) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            // 0 = 有重复数据，>1 添加成功
+            return conn.getJedis().sadd(key, value) >= 0;
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 返回所有成员的差集
+     *
+     * @param keys
+     * @return
+     */
+    public Set<String> sdiff(String... keys) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().sdiff(keys);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 返回所有集合的交集
+     *
+     * @param keys
+     * @return
+     */
+    public Set<String> sinter(String... keys) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().sinter(keys);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 是否member是否是集合中的成员
+     *
+     * @return
+     */
+    public boolean sismember(String key, String member) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().sismember(key, member);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 返回集合所有成员
+     *
+     * @param key
+     * @return
+     */
+    public Set<String> smembers(String key) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().smembers(key);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 移除元素
+     *
+     * @param key
+     * @return
+     */
+    public Set<String> sunion(String key) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().sunion(key);
+        } finally {
+            conn.close();
+        }
+    }
+    // ========================= Set操作 end ================================
 }

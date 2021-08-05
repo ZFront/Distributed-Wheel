@@ -6,6 +6,7 @@ import com.google.common.hash.Funnels;
 /**
  * @desc 布隆过滤器
  * 常用于大数量的判断是否存在。
+ * 特点：不存在的一定不存在，存在的可能存在
  * 例如：统计UV；爬虫过滤已经抓过的URL；等等
  * <p>
  * 将大批量的数据怼到hash数据中，往往占用的空间会很大。而使用BloomFilter则只需要hash表1/8~1/4大小就解决同样的问题
@@ -40,6 +41,7 @@ public class SingleBloomFilter {
         int count = 0;
         for (int i = total; i < total + 10000; i++) {
             if (defaultBF.mightContain(i)) {
+                // 误判，把不存在过滤器中的数据，认为在过滤器中
                 count++;
             }
         }

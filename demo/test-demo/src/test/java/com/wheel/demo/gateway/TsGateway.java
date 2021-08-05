@@ -24,4 +24,18 @@ public class TsGateway {
         String apiResp = OkHttpUtil.postJsonSync(url, JsonUtil.toString(param));
         System.out.println(apiResp);
     }
+
+    @Test
+    public void tsRateLimit() throws Exception {
+        String url = "http://127.0.0.1:9999/demo";
+        Map<String, String> param = Maps.newHashMap();
+        param.put("version", "1.0");
+        param.put("method", "demo.ok");
+        param.put("data", JsonUtil.toString(param));
+
+        for (int i = 0; i < 50; i++) {
+            String apiResp = OkHttpUtil.postJsonSync(url, JsonUtil.toString(param));
+            System.out.println(apiResp);
+        }
+    }
 }

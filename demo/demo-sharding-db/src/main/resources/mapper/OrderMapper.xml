@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wheel.demo.sharding.entity.Order">
+    <sql id="table"> t_order </sql>
+
+    <!-- 用于返回的bean对象 -->
+    <resultMap id="BaseResultMap" type="com.wheel.demo.sharding.entity.Order">
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="COMPLETE_TIME" property="completeTime" jdbcType="TIMESTAMP"/>
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="ORDER_N0" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="TRX_NO" property="trxNo" jdbcType="VARCHAR"/>
+        <result column="ORDER_AMOUNT" property="orderAmount" jdbcType="DECIMAL"/>
+
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="Base_Column_List">
+		CREATE_TIME,
+        COMPLETE_TIME,
+		USER_ID,
+		ORDER_NO,
+		TRX_NO,
+		ORDER_AMOUNT
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderNo" parameterType="com.wheel.demo.sharding.entity.Order">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        CREATE_TIME,
+        COMPLETE_TIME,
+        USER_ID,
+        ORDER_NO,
+        TRX_NO,
+        ORDER_AMOUNT
+        ) VALUES (
+        #{createTime,jdbcType=TIMESTAMP},
+        #{completeTime,jdbcType=TIMESTAMP},
+        #{userId,jdbcType=VARCHAR},
+        #{orderNo,jdbcType=VARCHAR},
+        #{trxNo,jdbcType=VARCHAR},
+        #{orderAmount,jdbcType=DECIMAL}
+        )
+    </insert>
+
+    <!-- 批量插入记录 -->
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="orderNo" parameterType="list">
+        INSERT INTO
+        <include refid="table"/>
+        (
+        CREATE_TIME,
+        COMPLETE_TIME,
+        USER_ID,
+        ORDER_NO,
+        TRX_NO,
+        ORDER_AMOUNT
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.completeTime,jdbcType=TIMESTAMP},
+            #{item.userId,jdbcType=VARCHAR},
+            #{item.orderNo,jdbcType=VARCHAR},
+            #{item.trxNo,jdbcType=VARCHAR},
+            #{item.orderAmount,jdbcType=DECIMAL}
+            )
+        </foreach>
+    </insert>
+
+    <!--更新-->
+    <update id="update" parameterType="com.wheel.demo.sharding.entity.Order">
+        UPDATE
+        <include refid="table"/>
+        SET
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        COMPLETE_TIME = #{completeTime,jdbcType=TIMESTAMP},
+        USER_ID = #{userId,jdbcType=VARCHAR},
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+        TRX_NO = #{trxNo,jdbcType=VARCHAR},
+        ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL}
+        WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+    </update>
+
+    <!-- 只更新不为null的属性 -->
+    <update id="updateIfNotNull" parameterType="com.wheel.demo.sharding.entity.Order">
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="completeTime != null">
+                COMPLETE_TIME = #{completeTime,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="trxNo != null">
+                TRX_NO = #{trxNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmount != null">
+                ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL},
+            </if>
+        </set>
+        WHERE ID = #{id,jdbcType=BIGINT} and VERSION = #{version,jdbcType=BIGINT}
+    </update>
+
+    <!-- 多条件组合查询 -->
+    <select id="listBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        <choose>
+            <when test="sortColumns != null and sortColumns !='' ">
+                <![CDATA[ ORDER BY #{sortColumns} ]]>
+            </when>
+        </choose>
+    </select>
+
+    <!-- 计算总记录数 -->
+    <select id="countBy" parameterType="java.util.Map" resultType="long">
+        select count(*) from
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
+
+    <!--按查询条件删除-->
+    <delete id="deleteBy">
+        DELETE FROM
+        <include refid="table"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </delete>
+
+    <!-- ↑↑↑↑↑↑ 如果有新增字段、删除字段、修改字段 以上内容可用模板生成新内容后直接替换 ↑↑↑↑↑↑ -->
+    <!-- ↓↓↓↓↓↓ 以下内容是根据需求手动添加或修改的，请勿使用模板内容直接覆盖 ↓↓↓↓↓↓ -->
+
+    <sql id="condition_sql">
+        <if test="userId != null and userId !=''">
+            and USER_ID = #{userId,jdbcType=SMALLINT}
+        </if>
+        <if test="orderNo != null and orderNo !=''">
+            and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="trxNo != null and trxNo !=''">
+            and TRX_NO = #{trxNo,jdbcType=VARCHAR}
+        </if>
+    </sql>
+</mapper>
+
