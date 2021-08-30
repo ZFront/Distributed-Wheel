@@ -1,5 +1,7 @@
 package com.wheel.mq.demo;
 
+import com.wheel.common.enums.mq.NotifyTypeEnum;
+import com.wheel.mq.core.AmqSender;
 import com.wheel.mq.demo.biz.NotityDemoBiz;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,14 +15,21 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MqDemoApplication.class)
-public class TsRetryMq {
+public class TsSendMq {
 
     @Autowired
     private NotityDemoBiz notityDemoBiz;
+
+    @Autowired
+    private AmqSender amqSender;
 
     @Test
     public void testRetryMq() {
         notityDemoBiz.sendRetryNotify("ceshi");
     }
 
+    @Test
+    public void testSendMq() {
+        amqSender.sendQueue(NotifyTypeEnum.QUEUE_TEST_NOTIFY, "123", "4321");
+    }
 }

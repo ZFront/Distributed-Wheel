@@ -5,10 +5,7 @@ import com.wheel.common.enums.mq.NotifyTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ScheduledMessage;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.jms.core.JmsTemplate;
-
-import javax.annotation.Resource;
 
 /**
  * @description ActiveMq 业务通知类
@@ -18,10 +15,11 @@ import javax.annotation.Resource;
 @Slf4j
 public class AmqSender {
 
-    @Resource(name = "jmsTemplate")
     private JmsTemplate jmsTemplate;
-    @Resource(name = "ackJmsTemplate")
-    private JmsTemplate ackJmsTemplate;
+
+    public AmqSender(JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
+    }
 
     /**
      * 发送一个queue消息
@@ -74,11 +72,12 @@ public class AmqSender {
         log.info("trxNo={} sendMq , notifyType={}, msg={}, destinationType={}, delayTime={}", trxNo, notifyType.getDesc(), msg, destinationType, delayTime);
         try {
             if (DestinationTypeEnum.TOPIC.equals(destinationType)) {
-                ackJmsTemplate.convertAndSend(new ActiveMQTopic(notifyType.getDestination()), msg,
-                        postProcessor -> {
-                            postProcessor.setIntProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delayTime * 1000);
-                            return postProcessor;
-                        });
+//                ackJmsTemplate.convertAndSend(new ActiveMQTopic(notifyType.getDestination()), msg,
+//                        postProcessor -> {
+//                            postProcessor.setIntProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delayTime * 1000);
+//                            return postProcessor;
+//                        });
+                // TODO
             } else {
                 jmsTemplate.convertAndSend(new ActiveMQQueue(notifyType.getDestination()), msg,
                         postProcessor -> {

@@ -4,14 +4,19 @@ import com.wheel.redis.core.RedisConnectionFactory;
 import com.wheel.redis.prop.RedisProp;
 import com.wheel.redis.client.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import redis.clients.jedis.Jedis;
 
 @Configuration
-@EnableConfigurationProperties(RedisProp.class)
+@ConditionalOnClass({Jedis.class, JedisConnectionFactory.class})
+@AutoConfigureAfter(RedisAutoConfiguration.class)
 public class RedisConfig {
 
     @Autowired
