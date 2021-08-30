@@ -7,7 +7,6 @@ import org.apache.activemq.ScheduledMessage;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -17,7 +16,6 @@ import javax.annotation.Resource;
  * @date: 2020/5/28
  */
 @Slf4j
-@Component
 public class AmqSender {
 
     @Resource(name = "jmsTemplate")
@@ -73,7 +71,7 @@ public class AmqSender {
     }
 
     private void send(NotifyTypeEnum notifyType, String trxNo, String msg, int destinationType, int delayTime) {
-        log.error("trxNo={} sendMq start, notifyType={}, msg={}, destinationType={}, delayTime={}", trxNo, notifyType.getDesc(), msg, destinationType, delayTime);
+        log.info("trxNo={} sendMq , notifyType={}, msg={}, destinationType={}, delayTime={}", trxNo, notifyType.getDesc(), msg, destinationType, delayTime);
         try {
             if (DestinationTypeEnum.TOPIC.equals(destinationType)) {
                 ackJmsTemplate.convertAndSend(new ActiveMQTopic(notifyType.getDestination()), msg,

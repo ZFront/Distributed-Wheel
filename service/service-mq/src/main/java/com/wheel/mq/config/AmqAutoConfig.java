@@ -1,5 +1,6 @@
 package com.wheel.mq.config;
 
+import com.wheel.mq.core.AmqSender;
 import com.wheel.mq.prop.MqProp;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
@@ -80,5 +81,10 @@ public class AmqAutoConfig {
         // 成倍数增长的时间
         redeliveryPolicy.setBackOffMultiplier(2);
         return redeliveryPolicy;
+    }
+
+    @Bean
+    public AmqSender amqSender() {
+        return new AmqSender();
     }
 }
