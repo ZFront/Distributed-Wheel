@@ -1,4 +1,4 @@
-package com.wheel.common.constant;
+package com.wheel.common.constant.mq;
 
 /**
  * @description topic地址

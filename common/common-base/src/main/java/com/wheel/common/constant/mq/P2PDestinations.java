@@ -1,4 +1,4 @@
-package com.wheel.common.constant;
+package com.wheel.common.constant.mq;
 
 /**
  * @description 点对点消息地址
@@ -8,5 +8,7 @@ package com.wheel.common.constant;
 public class P2PDestinations {
 
     public final static String QUEUE_TEST = "com.wheel.queue.test";
+
+    public final static String QUEUE_DELAY_TEST = "com.wheel.queue.delay.test";
 
 }

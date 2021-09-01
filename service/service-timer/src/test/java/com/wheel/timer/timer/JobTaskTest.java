@@ -2,7 +2,7 @@ package com.wheel.timer.timer;
 
 import com.wheel.timer.ServiceTimerApp;
 import com.wheel.timer.biz.JobTaskBiz;
-import com.wheel.common.constant.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDestinations;
 import com.wheel.timer.entity.JobTask;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.enums.timer.TimeUnitEnum;

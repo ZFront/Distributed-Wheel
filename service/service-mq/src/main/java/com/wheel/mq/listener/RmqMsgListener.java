@@ -1,6 +1,6 @@
 package com.wheel.mq.listener;
 
-import com.wheel.common.constant.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDestinations;
 import com.wheel.common.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;

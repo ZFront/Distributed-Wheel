@@ -29,7 +29,12 @@ public class TsSendMq {
     }
 
     @Test
-    public void testSendMq() {
+    public void testSendQueue() {
         amqSender.sendQueue(NotifyTypeEnum.QUEUE_TEST_NOTIFY, "123", "4321");
+    }
+
+    @Test
+    public void testSendTopic() {
+        amqSender.sendTopic(NotifyTypeEnum.TOPIC_TEST_NOTIFY, "234", "这是一条topic测试");
     }
 }

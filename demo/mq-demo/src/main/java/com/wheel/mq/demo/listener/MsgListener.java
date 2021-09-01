@@ -1,6 +1,7 @@
 package com.wheel.mq.demo.listener;
 
-import com.wheel.common.constant.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDestinations;
+import com.wheel.common.constant.mq.VTopicConsume;
 import com.wheel.common.util.JsonUtil;
 import com.wheel.mq.demo.biz.NotityDemoBiz;
 import com.wheel.mq.demo.vo.RetryNotifyVo;
@@ -20,7 +21,12 @@ public class MsgListener {
     @Autowired
     private NotityDemoBiz notityDemoBiz;
 
-    @JmsListener(destination = P2PDestinations.QUEUE_TEST)
+    /**
+     * 接收queue消息
+     *
+     * @param msg
+     */
+    @JmsListener(destination = P2PDestinations.QUEUE_DELAY_TEST)
     public void receiveMsg(String msg) {
         log.info("queue消息接收：msg={}", msg);
 
@@ -35,5 +41,23 @@ public class MsgListener {
         } else {
             log.info("trxNo={}, 当前补单次数为:{},补单次数已用尽，不再发送补单通知", trxNo, vo.getCurrentRetryTimes());
         }
+    }
+
+    /**
+     *
+     * @param msg
+     */
+    @JmsListener(destination = VTopicConsume.TOPIC_TEST_CONSUMER_A)
+    public void receiveTopicA(String msg) {
+        log.info("topic consumerA 接收消息：msg={}", msg);
+    }
+
+    /**
+     *
+     * @param msg
+     */
+    @JmsListener(destination = VTopicConsume.TOPIC_TEST_CONSUMER_B)
+    public void receiveTopicB(String msg) {
+        log.info("topic consumerB 接收消息：msg={}", msg);
     }
 }
