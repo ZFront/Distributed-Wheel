@@ -1,4 +1,6 @@
-package com.wheel.unique.service.facade;
+package com.wheel.unique.service;
+
+import java.util.List;
 
 /**
  * @description 唯一索引接口
@@ -14,6 +16,15 @@ public interface UniqueFacade {
      * @return
      */
     long getSegmentId(String key);
+
+    /**
+     * 数据库发号
+     *
+     * @param key
+     * @param count 发号数量
+     * @return
+     */
+    List<Long> getSegmentId(String key, int count);
 
     /**
      * 通过leaf中的snowFlake方式实现

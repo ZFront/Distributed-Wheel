@@ -1,12 +1,14 @@
-package com.wheel.unique.service.impl;
+package com.wheel.unique.serviceImpl;
 
 import com.wheel.unique.biz.RedisIdBiz;
 import com.wheel.unique.biz.SnowFlakeBiz;
 import com.wheel.unique.biz.SqlIdBiz;
 import com.wheel.unique.biz.UuidBiz;
-import com.wheel.unique.service.facade.UniqueFacade;
+import com.wheel.unique.service.UniqueFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @description
@@ -31,6 +33,11 @@ public class UniqueFacadeImpl implements UniqueFacade {
     @Override
     public long getSegmentId(String key) {
         return sqlIdBiz.getId(key);
+    }
+
+    @Override
+    public List<Long> getSegmentId(String key, int count) {
+        return sqlIdBiz.getId(key, count);
     }
 
     @Override

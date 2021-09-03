@@ -2,6 +2,7 @@ package com.wheel.lock.serviceImpl;
 
 import com.wheel.lock.core.DbLock;
 import com.wheel.lock.service.LockFacade;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author: zhouf
  * @date: 2020/7/2
  */
-
+@Service
 public class DbLockImpl implements LockFacade {
 
     @Autowired

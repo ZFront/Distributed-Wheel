@@ -108,5 +108,10 @@
             <artifactId>common-base</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wheel</groupId>
+            <artifactId>facade-lock</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

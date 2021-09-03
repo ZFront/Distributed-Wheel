@@ -4,7 +4,7 @@ import com.sankuai.inf.leaf.common.Result;
 import com.sankuai.inf.leaf.common.Status;
 import com.wheel.common.enums.exception.PublicBizCodeEnum;
 import com.wheel.common.exception.BizException;
-import com.wheel.unique.service.impl.SnowflakeService;
+import com.wheel.unique.serviceImpl.SnowflakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
