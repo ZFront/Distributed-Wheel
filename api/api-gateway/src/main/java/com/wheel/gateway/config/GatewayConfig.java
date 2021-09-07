@@ -1,5 +1,6 @@
 package com.wheel.gateway.config;
 
+import com.wheel.gateway.filters.local.IPCheckGatewayFilterFactory;
 import com.wheel.gateway.ratelimit.core.IpKeyResolver;
 import com.wheel.gateway.ratelimit.core.UriKeyResolver;
 import org.springframework.boot.SpringBootConfiguration;
@@ -13,12 +14,20 @@ import org.springframework.context.annotation.Bean;
 @SpringBootConfiguration
 public class GatewayConfig {
 
-    @Bean(name = "ipKeyResolver")
+    @Bean
+    public IPCheckGatewayFilterFactory iPCheckGatewayFilterFactory() {
+        return new IPCheckGatewayFilterFactory();
+    }
+
+    /**
+     * ip限流器
+     */
+    @Bean
     public IpKeyResolver ipKeyResolver() {
         return new IpKeyResolver();
     }
 
-    @Bean(name = "uriKeyResolver")
+    @Bean
     public UriKeyResolver uriKeyResolver() {
         return new UriKeyResolver();
     }

@@ -1,4 +1,4 @@
-package com.wheel.unique.serviceImpl;
+package com.wheel.unique.service;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.sankuai.inf.leaf.IDGen;

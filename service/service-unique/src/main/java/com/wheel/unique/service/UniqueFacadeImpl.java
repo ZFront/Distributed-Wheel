@@ -1,10 +1,9 @@
-package com.wheel.unique.serviceImpl;
+package com.wheel.unique.service;
 
 import com.wheel.unique.biz.RedisIdBiz;
 import com.wheel.unique.biz.SnowFlakeBiz;
 import com.wheel.unique.biz.SqlIdBiz;
 import com.wheel.unique.biz.UuidBiz;
-import com.wheel.unique.service.UniqueFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

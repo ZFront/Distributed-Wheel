@@ -1,7 +1,6 @@
-package com.wheel.lock.serviceImpl;
+package com.wheel.lock.service;
 
 import com.wheel.lock.core.DbLock;
-import com.wheel.lock.service.LockFacade;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

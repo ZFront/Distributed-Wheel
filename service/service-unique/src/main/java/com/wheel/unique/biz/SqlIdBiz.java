@@ -4,7 +4,7 @@ import com.sankuai.inf.leaf.common.Result;
 import com.sankuai.inf.leaf.common.Status;
 import com.wheel.common.enums.exception.PublicBizCodeEnum;
 import com.wheel.common.exception.BizException;
-import com.wheel.unique.serviceImpl.SegmentService;
+import com.wheel.unique.service.SegmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
