@@ -16,6 +16,16 @@
             <artifactId>guava</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!-- 业务包 -->
         <dependency>
             <groupId>com.wheel</groupId>
@@ -23,5 +33,4 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 </project>
