@@ -25,7 +25,8 @@ public class ConsistenHashVirtualNode {
      */
     private static SortedMap<Integer, String> sortedMap = new TreeMap<>();
     /**
-     * 每个服务器，生成的虚拟节点的个数
+     * 每个服务器，生成的虚拟节点的个数。
+     * 一般来说，这个虚拟的节点会比较大
      */
     private static int virtualNums = 3;
 
@@ -55,7 +56,7 @@ public class ConsistenHashVirtualNode {
     }
 
     /**
-     * 移除节点 . ==> 实际涨
+     * 移除节点 . ==> 缩容的时候使用
      *
      * @param service
      */

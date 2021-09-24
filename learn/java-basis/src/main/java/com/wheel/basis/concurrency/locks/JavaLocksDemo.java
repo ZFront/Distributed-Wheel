@@ -11,7 +11,7 @@ public class JavaLocksDemo {
 
     // ---------------------------- 悲观锁调用方式 ------------------------
     // synchronized
-    public synchronized void testMethod() {
+    synchronized void testMethod() {
         // 操作同步资源
     }
 

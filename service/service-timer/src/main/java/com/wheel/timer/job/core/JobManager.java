@@ -1,15 +1,17 @@
 package com.wheel.timer.job.core;
 
-import com.wheel.timer.entity.JobTask;
 import com.wheel.common.enums.exception.PublicBizCodeEnum;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.enums.timer.TimeUnitEnum;
 import com.wheel.common.exception.BizException;
+import com.wheel.timer.entity.JobTask;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * @description 任务管理类
@@ -129,14 +131,51 @@ public class JobManager {
     public boolean addJob(JobTask task) {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         try {
-            JobDetail jobDetail = JobBuilder.newJob(JobExecutor.class).withIdentity(task.getJobName()).build();
+            JobDetail jobDetail = JobBuilder
+                    .newJob(JobExecutor.class)
+                    .withIdentity(task.getJobName())
+                    .build();
 
             Trigger trigger = buildTrigger(task);
 
             scheduler.scheduleJob(jobDetail, trigger);
             return true;
         } catch (SchedulerException e) {
-            log.error("创建定时器发生异常");
+            log.error("创建定时器发生异常", e);
+            return false;
+        }
+    }
+
+    /**
+     * 更新任务
+     *
+     * @param task
+     */
+    public Date rescheduleJob(JobTask task) throws SchedulerException {
+        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+
+        TriggerKey triggerKey = TriggerKey.triggerKey(task.getJobName());
+
+        Trigger trigger = buildTrigger(task);
+
+        // 重新设置Job
+        return scheduler.rescheduleJob(triggerKey, trigger);
+    }
+
+    /**
+     * 恢复任务，返回任务状态
+     *
+     * @return
+     */
+    public boolean resumeJob(String jobName) {
+        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+        JobKey jobKey = JobKey.jobKey(jobName);
+
+        try {
+            scheduler.resumeJob(jobKey);
+            return true;
+        } catch (SchedulerException e) {
+            log.error("恢复定时器发生异常", e);
             return false;
         }
     }

@@ -4,8 +4,6 @@ import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.enums.timer.TimeUnitEnum;
 import lombok.Getter;
 import lombok.Setter;
-import org.quartz.CronTrigger;
-import org.quartz.SimpleTrigger;
 
 import java.io.Serializable;
 import java.util.Date;

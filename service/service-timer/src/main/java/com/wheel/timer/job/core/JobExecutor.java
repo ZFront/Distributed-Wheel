@@ -30,7 +30,7 @@ public class JobExecutor implements Job {
 
         JobTask task = jobTaskBiz.getCheckJobTask(jobKey.getName());
 
-//        jobNotifyer.sendNotify(task);
         log.info("jobName={}, 发送通知", jobKey.getName());
+        jobNotifyer.sendNotify(task);
     }
 }

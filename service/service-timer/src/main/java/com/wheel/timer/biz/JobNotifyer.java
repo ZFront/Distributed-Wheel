@@ -1,6 +1,12 @@
 package com.wheel.timer.biz;
 
+import com.wheel.common.enums.mq.NotifyTypeEnum;
+import com.wheel.mq.core.AmqSender;
+import com.wheel.timer.entity.JobTask;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 /**
  * @description 业务分发类
@@ -10,12 +16,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JobNotifyer {
 
-//    @Autowired
-//    private AmqSender amqSender;
-//
-//    public void sendNotify(JobTask jobTask) {
-//        // TODO 可根据实际使用情况，进行各自业务实现
-//        amqSender.sendQueue(NotifyTypeEnum.QUEUE_TEST_NOTIFY, UUID.randomUUID().toString(), jobTask.getParamJson());
-//    }
+    @Autowired
+    private AmqSender amqSender;
 
+    public void sendNotify(JobTask jobTask) {
+        // 可根据实际使用情况，进行各自业务实现
+        amqSender.sendQueue(NotifyTypeEnum.QUEUE_TEST_NOTIFY, UUID.randomUUID().toString(), jobTask.getParamJson());
+    }
 }

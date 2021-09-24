@@ -1,17 +1,20 @@
 package com.wheel.timer.biz;
 
-import com.wheel.timer.dao.JobTaskDao;
-import com.wheel.timer.entity.JobTask;
 import com.wheel.common.enums.exception.PublicBizCodeEnum;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.exception.BizException;
-import com.wheel.timer.job.core.JobManager;
+import com.wheel.common.util.JsonUtil;
 import com.wheel.common.util.StringUtil;
+import com.wheel.timer.dao.JobTaskDao;
+import com.wheel.timer.entity.JobTask;
+import com.wheel.timer.job.core.JobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * 一般业务比较多的情况下，可以使用 jobGroup + jobName 来使用
@@ -30,6 +33,9 @@ public class JobTaskBiz {
     @Autowired
     private JobManager jobManager;
 
+    @Autowired
+    private JobNotifyer jobNotifyer;
+
     /**
      * 添加任务
      *
@@ -40,6 +46,7 @@ public class JobTaskBiz {
     public void addJobTask(JobTask task) {
         // 校验参数
         checkTask(task);
+
         if (task.getExecutedTimes() == null) {
             task.setExecutedTimes(0L);
         }
@@ -58,6 +65,47 @@ public class JobTaskBiz {
             throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "添加定时任务失败");
         }
     }
+
+    /**
+     * 更新定时任务
+     *
+     * @param jobTask
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void updateJobTask(JobTask jobTask) {
+        checkTask(jobTask);
+
+        JobTask dbJobTask = jobTaskDao.getByJobName(jobTask.getJobName());
+        if (dbJobTask == null) {
+            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "定时任务不存在");
+        }
+
+        // 更新对应的重要参数
+        if (JobTypeEnum.SIMPLE_JOB.getValue() == jobTask.getJobType()) {
+            dbJobTask.setIntervals(jobTask.getIntervals());
+            dbJobTask.setIntervalUnit(jobTask.getIntervalUnit());
+        } else if (JobTypeEnum.CRON_JOB.getValue() == jobTask.getJobType()) {
+            dbJobTask.setCronExpression(jobTask.getCronExpression());
+        }
+        dbJobTask.setDestination(jobTask.getDestination());
+        dbJobTask.setEndTime(jobTask.getEndTime());
+        dbJobTask.setParamJson(jobTask.getParamJson());
+        dbJobTask.setJobDesc(jobTask.getJobDesc());
+
+        jobTaskDao.update(dbJobTask);
+
+        try {
+            Date result = jobManager.rescheduleJob(dbJobTask);
+            if (result == null) {
+                // 抛出，让DB更新回滚
+                throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
+            }
+        } catch (Exception e) {
+            log.error("更新定时任务失败", e);
+            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
+        }
+    }
+
 
     /**
      * 删除任务
@@ -112,6 +160,33 @@ public class JobTaskBiz {
             log.error("触发定时任务发生异常", e);
         }
         return jobManager.triggerJob(jobName);
+    }
+
+    /**
+     * 恢复被挂起的定时任务
+     *
+     * @param jobName
+     * @return
+     */
+    public boolean restartJob(String jobName) {
+        getCheckJobTask(jobName);
+        try {
+            return jobManager.resumeJob(jobName);
+        } catch (Exception e) {
+            log.error("恢复定时器任务发生异常", e);
+            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "重启定时任务失败");
+        }
+    }
+
+    /**
+     * 发送任务通知
+     *
+     * @param jobName
+     */
+    public void sendJobNotify(String jobName) {
+        JobTask jobTask = getCheckJobTask(jobName);
+        log.info("发送任务通知：{}", JsonUtil.toString(jobTask));
+        jobNotifyer.sendNotify(jobTask);
     }
 
 

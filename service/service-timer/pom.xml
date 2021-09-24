@@ -89,6 +89,11 @@
         </dependency>
         <dependency>
             <groupId>com.wheel</groupId>
+            <artifactId>facade-timer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wheel</groupId>
             <artifactId>service-mq</artifactId>
             <version>${project.version}</version>
         </dependency>
