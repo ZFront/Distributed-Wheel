@@ -11,30 +11,30 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class ResponseParamVo<T> {
+public class ResponseResult<T> {
 
     private String respCode;
     private String respMsg;
     private T data;
 
-    public static <T> ResponseParamVo<T> success() {
+    public static <T> ResponseResult<T> success() {
         return buildRespParam(RespCodeEnum.SUCCESS, RespCodeEnum.SUCCESS.getDesc(), null);
     }
 
-    public static <T> ResponseParamVo<T> success(T data) {
+    public static <T> ResponseResult<T> success(T data) {
         return buildRespParam(RespCodeEnum.SUCCESS, RespCodeEnum.SUCCESS.getDesc(), data);
     }
 
-    public static <T> ResponseParamVo<T> fail() {
+    public static <T> ResponseResult<T> fail() {
         return buildRespParam(RespCodeEnum.FAIL, RespCodeEnum.FAIL.getDesc(), null);
     }
 
-    public static <T> ResponseParamVo<T> fail(T data) {
+    public static <T> ResponseResult<T> fail(T data) {
         return buildRespParam(RespCodeEnum.FAIL, RespCodeEnum.FAIL.getDesc(), data);
     }
 
-    private static <T> ResponseParamVo<T> buildRespParam(RespCodeEnum respCode, String respMsg, T data) {
-        ResponseParamVo<T> vo = new ResponseParamVo<>();
+    private static <T> ResponseResult<T> buildRespParam(RespCodeEnum respCode, String respMsg, T data) {
+        ResponseResult<T> vo = new ResponseResult<>();
         vo.setRespCode(respCode.name());
         vo.setRespMsg(respMsg);
         vo.setData(data);

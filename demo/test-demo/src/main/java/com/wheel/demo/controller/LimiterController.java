@@ -1,6 +1,6 @@
 package com.wheel.demo.controller;
 
-import com.wheel.common.vo.api.ResponseParamVo;
+import com.wheel.common.vo.api.ResponseResult;
 import com.wheel.redis.ratelimit.LimiterConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LimiterController {
 
     @GetMapping("/limit")
-    public ResponseParamVo limit() {
+    public ResponseResult limit() {
         if (LimiterConfig.rateLimiter.tryAcquire()) {
-            return ResponseParamVo.success();
+            return ResponseResult.success();
         } else {
-            return ResponseParamVo.fail("服务器繁忙！");
+            return ResponseResult.fail("服务器繁忙！");
         }
     }
 }

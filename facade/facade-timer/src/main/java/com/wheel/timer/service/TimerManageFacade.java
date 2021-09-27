@@ -1,6 +1,11 @@
 package com.wheel.timer.service;
 
+import com.wheel.common.vo.PageQuery;
+import com.wheel.common.vo.PageResult;
 import com.wheel.timer.entity.JobTask;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @description 定时管理类
@@ -55,4 +60,11 @@ public interface TimerManageFacade {
      * 发送任务通知
      */
     void sendJobNotify(String jobName);
+
+    /**
+     * 列表查询
+     *
+     * @return
+     */
+    PageResult<List<JobTask>> listPage(Map<String, Object> paramMap, PageQuery pageQuery);
 }

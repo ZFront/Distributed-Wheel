@@ -1,7 +1,6 @@
 package com.wheel.rpc.client.core;
 
 import com.alibaba.fastjson.JSON;
-import com.wheel.common.vo.rest.RestResult;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

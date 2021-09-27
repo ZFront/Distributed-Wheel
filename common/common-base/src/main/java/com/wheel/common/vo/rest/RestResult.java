@@ -3,7 +3,7 @@ package com.wheel.common.vo.rest;
 import java.util.Date;
 
 /**
- * @desc
+ * @desc 对内接口使用的返回实体
  * @author: zhouf
  */
 public class RestResult<T> {

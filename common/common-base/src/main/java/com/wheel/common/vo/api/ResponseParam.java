@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * @description 返回实体
+ * @description 对外接口返回的实体
  * @author: zhouf
  * @date: 2020/9/9
  */

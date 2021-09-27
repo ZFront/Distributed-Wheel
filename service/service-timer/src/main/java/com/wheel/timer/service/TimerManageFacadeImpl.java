@@ -1,9 +1,15 @@
 package com.wheel.timer.service;
 
+import com.wheel.common.vo.PageQuery;
+import com.wheel.common.vo.PageResult;
 import com.wheel.timer.biz.JobTaskBiz;
+import com.wheel.timer.dao.JobTaskDao;
 import com.wheel.timer.entity.JobTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @desc
@@ -14,6 +20,9 @@ public class TimerManageFacadeImpl implements TimerManageFacade {
 
     @Autowired
     private JobTaskBiz jobTaskBiz;
+
+    @Autowired
+    private JobTaskDao jobTaskDao;
 
     @Override
     public void addJob(JobTask task) {
@@ -48,5 +57,10 @@ public class TimerManageFacadeImpl implements TimerManageFacade {
     @Override
     public void sendJobNotify(String jobName) {
         jobTaskBiz.sendJobNotify(jobName);
+    }
+
+    @Override
+    public PageResult<List<JobTask>> listPage(Map<String, Object> paramMap, PageQuery pageQuery) {
+        return jobTaskDao.listPage(paramMap, pageQuery);
     }
 }

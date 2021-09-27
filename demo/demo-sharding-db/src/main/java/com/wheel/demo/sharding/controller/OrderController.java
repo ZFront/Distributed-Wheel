@@ -1,7 +1,7 @@
 package com.wheel.demo.sharding.controller;
 
 import com.wheel.common.util.StringUtil;
-import com.wheel.common.vo.api.ResponseParamVo;
+import com.wheel.common.vo.api.ResponseResult;
 import com.wheel.demo.sharding.dao.OrderDao;
 import com.wheel.demo.sharding.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class OrderController {
     private OrderDao orderDao;
 
     @GetMapping("batchInsert")
-    public ResponseParamVo batchInsert() {
+    public ResponseResult batchInsert() {
         List<Order> orderList = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             Order order = new Order();
@@ -40,14 +40,14 @@ public class OrderController {
             orderList.add(order);
         }
         orderDao.insert(orderList);
-        return ResponseParamVo.success();
+        return ResponseResult.success();
     }
 
     @GetMapping("query")
-    public ResponseParamVo query() {
+    public ResponseResult query() {
         Map<String, Object> params = new HashMap<>(2);
         params.put("userId", USER_ID);
-        return ResponseParamVo.success(orderDao.listBy(params));
+        return ResponseResult.success(orderDao.listBy(params));
     }
 
 }
