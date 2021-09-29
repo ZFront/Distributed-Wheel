@@ -38,7 +38,7 @@ public class DbLock {
      *
      * @param resourceId   资源ID
      * @param expireSecond 过期时间
-     * @return clinetId 获取客户端id
+     * @return clientId 获取客户端id
      */
     @Transactional
     public String tryLock(String resourceId, int expireSecond) {
