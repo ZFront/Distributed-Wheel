@@ -1,8 +1,8 @@
 package com.wheel.algorithm.leetcode.tree;
 
 
-import com.wheel.basis.common.TreeNode;
-import com.wheel.basis.common.TreeNodeUtil;
+import com.wheel.algorithm.common.TreeNode;
+import com.wheel.algorithm.common.TreeNodeUtil;
 
 /**
  * @desc {@link https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/description/}
