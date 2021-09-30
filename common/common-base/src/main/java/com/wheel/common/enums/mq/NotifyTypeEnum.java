@@ -1,7 +1,7 @@
 package com.wheel.common.enums.mq;
 
-import com.wheel.common.constant.mq.P2PDestinations;
-import com.wheel.common.constant.mq.TopicDestionations;
+import com.wheel.common.constant.mq.P2PDest;
+import com.wheel.common.constant.mq.TopicDest;
 
 import java.util.Arrays;
 
@@ -15,17 +15,17 @@ public enum NotifyTypeEnum {
     /**
      * queue通知
      */
-    QUEUE_TEST_NOTIFY("queue测试", 1, P2PDestinations.QUEUE_TEST),
+    QUEUE_TEST_NOTIFY("queue测试", 1, P2PDest.QUEUE_TEST),
 
     /**
      * queue通知
      */
-    QUEUE_DELAY_TEST_NOTIFY("queue延时消息测试", 2, P2PDestinations.QUEUE_DELAY_TEST),
+    QUEUE_DELAY_TEST_NOTIFY("queue延时消息测试", 2, P2PDest.QUEUE_DELAY_TEST),
 
     /**
      * topic通知
      */
-    TOPIC_TEST_NOTIFY("topic测试", 3, TopicDestionations.TOPIC_TEST),
+    TOPIC_TEST_NOTIFY("topic测试", 3, TopicDest.TOPIC_TEST),
     ;
 
     /**

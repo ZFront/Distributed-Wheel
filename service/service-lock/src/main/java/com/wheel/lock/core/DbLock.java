@@ -4,7 +4,7 @@ import com.wheel.lock.constant.LockConstant;
 import com.wheel.lock.entity.Locker;
 import com.wheel.lock.dao.LockerDao;
 import com.wheel.lock.entity.LockerStatusEnum;
-import com.wheel.common.enums.exception.PublicBizCodeEnum;
+import com.wheel.common.enums.exception.BizCodeEnum;
 import com.wheel.common.exception.BizException;
 import com.wheel.common.util.DateUtil;
 import com.wheel.common.util.MD5Util;
@@ -43,11 +43,11 @@ public class DbLock {
     @Transactional
     public String tryLock(String resourceId, int expireSecond) {
         if (StringUtil.isEmpty(resourceId)) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
         } else if (resourceId.length() > 32) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "resourceId长度不能超过32");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "resourceId长度不能超过32");
         } else if (expireSecond <= 0 && expireSecond != LockConstant.NEVER_EXPIRE_VALUE) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "expireSecond 值无效");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "expireSecond 值无效");
         }
 
         Locker locker = lockerDao.getByResourceId(resourceId);
@@ -96,9 +96,9 @@ public class DbLock {
      */
     public boolean unlock(String resourceId, String clientLockId) {
         if (StringUtil.isEmpty(resourceId)) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
         } else if (StringUtil.isEmpty(clientLockId)) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "clientId不能为空");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "clientId不能为空");
         }
 
         Locker locker = lockerDao.getByResourceId(resourceId);
@@ -135,7 +135,7 @@ public class DbLock {
      */
     public boolean unlockForce(String resourceId, boolean isDelete) {
         if (StringUtil.isEmpty(resourceId)) {
-            throw new BizException(PublicBizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
+            throw new BizException(BizCodeEnum.PARAM_INVALID.getCode(), "resourceId不能为空");
         }
 
         Locker locker = lockerDao.getByResourceId(resourceId);

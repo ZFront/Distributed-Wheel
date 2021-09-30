@@ -5,7 +5,7 @@ package com.wheel.common.constant.mq;
  * @author: zhouf
  * @date: 2020/5/28
  */
-public class TopicDestionations {
+public class TopicDest {
 
     public final static String TOPIC_TEST = "VirtualTopic.TopicTest";
 }

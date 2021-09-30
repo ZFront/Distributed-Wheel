@@ -2,7 +2,7 @@ package com.wheel.unique.biz;
 
 import com.sankuai.inf.leaf.common.Result;
 import com.sankuai.inf.leaf.common.Status;
-import com.wheel.common.enums.exception.PublicBizCodeEnum;
+import com.wheel.common.enums.exception.BizCodeEnum;
 import com.wheel.common.exception.BizException;
 import com.wheel.unique.service.SegmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class SqlIdBiz {
         if (result.getStatus() == Status.SUCCESS) {
             return result.getId();
         } else {
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "segment生成失败,key=" + key);
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "segment生成失败,key=" + key);
         }
     }
 

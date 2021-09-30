@@ -1,6 +1,6 @@
 package com.wheel.mq.demo.listener;
 
-import com.wheel.common.constant.mq.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDest;
 import com.wheel.common.constant.mq.VTopicConsume;
 import com.wheel.common.util.JsonUtil;
 import com.wheel.mq.demo.biz.NotityDemoBiz;
@@ -26,7 +26,7 @@ public class MsgListener {
      *
      * @param msg
      */
-    @JmsListener(destination = P2PDestinations.QUEUE_DELAY_TEST)
+    @JmsListener(destination = P2PDest.QUEUE_DELAY_TEST)
     public void receiveMsg(String msg) {
         log.info("queue消息接收：msg={}", msg);
 

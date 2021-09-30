@@ -2,7 +2,7 @@ package com.wheel.timer.timer;
 
 import com.wheel.timer.ServiceTimerApp;
 import com.wheel.timer.biz.JobTaskBiz;
-import com.wheel.common.constant.mq.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDest;
 import com.wheel.timer.entity.JobTask;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.enums.timer.TimeUnitEnum;
@@ -35,7 +35,7 @@ public class JobTaskTest {
         JobTask task = new JobTask();
         task.setJobName("simpleJobTest4");
         task.setJobType(JobTypeEnum.SIMPLE_JOB.getValue());
-        task.setDestination(P2PDestinations.QUEUE_TEST);
+        task.setDestination(P2PDest.QUEUE_TEST);
         task.setStartTime(new Date());
         task.setIntervals(5);
         task.setIntervalUnit(TimeUnitEnum.SECOND.getValue());
@@ -55,7 +55,7 @@ public class JobTaskTest {
         JobTask task = new JobTask();
         task.setJobName("cronJob1");
         task.setJobType(JobTypeEnum.CRON_JOB.getValue());
-        task.setDestination(P2PDestinations.QUEUE_TEST);
+        task.setDestination(P2PDest.QUEUE_TEST);
         task.setCronExpression(cronExp);
         task.setStartTime(new Date());
         task.setJobStatus(Trigger.TriggerState.NORMAL.toString());

@@ -7,8 +7,8 @@ package com.wheel.common.constant.mq;
 public class VTopicConsume {
 
     // topic消费者A
-    public static final String TOPIC_TEST_CONSUMER_A = "Consumer.A." + TopicDestionations.TOPIC_TEST;
+    public static final String TOPIC_TEST_CONSUMER_A = "Consumer.A." + TopicDest.TOPIC_TEST;
 
     // topic消费者B
-    public static final String TOPIC_TEST_CONSUMER_B = "Consumer.B." + TopicDestionations.TOPIC_TEST;
+    public static final String TOPIC_TEST_CONSUMER_B = "Consumer.B." + TopicDest.TOPIC_TEST;
 }

@@ -1,6 +1,6 @@
 package com.wheel.timer.biz;
 
-import com.wheel.common.enums.exception.PublicBizCodeEnum;
+import com.wheel.common.enums.exception.BizCodeEnum;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.exception.BizException;
 import com.wheel.common.util.JsonUtil;
@@ -54,15 +54,15 @@ public class JobTaskBiz {
         try {
             // 判断任务是否存在 ==> jobName
             if (jobManager.checkExists(task.getJobName())) {
-                throw new BizException(PublicBizCodeEnum.BIZ_INVALID.getCode(), "定时任务已存在");
+                throw new BizException(BizCodeEnum.BIZ_INVALID.getCode(), "定时任务已存在");
             }
             jobTaskDao.insert(task);
             if (!jobManager.addJob(task)) {
-                throw new BizException(PublicBizCodeEnum.BIZ_INVALID.getCode(), "添加定时任务失败");
+                throw new BizException(BizCodeEnum.BIZ_INVALID.getCode(), "添加定时任务失败");
             }
         } catch (Exception e) {
             log.error("添加定时任务发生异常", e);
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "添加定时任务失败");
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "添加定时任务失败");
         }
     }
 
@@ -77,7 +77,7 @@ public class JobTaskBiz {
 
         JobTask dbJobTask = jobTaskDao.getByJobName(jobTask.getJobName());
         if (dbJobTask == null) {
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "定时任务不存在");
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "定时任务不存在");
         }
 
         // 更新对应的重要参数
@@ -98,11 +98,11 @@ public class JobTaskBiz {
             Date result = jobManager.rescheduleJob(dbJobTask);
             if (result == null) {
                 // 抛出，让DB更新回滚
-                throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
+                throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
             }
         } catch (Exception e) {
             log.error("更新定时任务失败", e);
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "更新定时任务失败");
         }
     }
 
@@ -120,7 +120,7 @@ public class JobTaskBiz {
 
         if (!jobManager.deleteJob(jobName)) {
             // 抛出异常，让异常回滚
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "删除任务失败");
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "删除任务失败");
         }
     }
 
@@ -154,7 +154,7 @@ public class JobTaskBiz {
         try {
             if (jobManager.isInStandbyMode()) {
                 log.info("jobName={},已被挂起，无法触发任务", jobName);
-                throw new BizException(PublicBizCodeEnum.BIZ_INVALID.getCode(), "任务已被挂起，无法触发该任务");
+                throw new BizException(BizCodeEnum.BIZ_INVALID.getCode(), "任务已被挂起，无法触发该任务");
             }
         } catch (Exception e) {
             log.error("触发定时任务发生异常", e);
@@ -174,7 +174,7 @@ public class JobTaskBiz {
             return jobManager.resumeJob(jobName);
         } catch (Exception e) {
             log.error("恢复定时器任务发生异常", e);
-            throw new BizException(PublicBizCodeEnum.BIZ_ERROR.getCode(), "重启定时任务失败");
+            throw new BizException(BizCodeEnum.BIZ_ERROR.getCode(), "重启定时任务失败");
         }
     }
 
@@ -200,7 +200,7 @@ public class JobTaskBiz {
     public JobTask getCheckJobTask(String jobName) {
         JobTask task = jobTaskDao.getByJobName(jobName);
         if (task == null) {
-            throw new BizException(PublicBizCodeEnum.BIZ_INVALID.getCode(), "该任务不存在");
+            throw new BizException(BizCodeEnum.BIZ_INVALID.getCode(), "该任务不存在");
         }
         return task;
     }

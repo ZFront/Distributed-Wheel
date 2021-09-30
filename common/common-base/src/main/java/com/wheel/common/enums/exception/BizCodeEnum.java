@@ -5,7 +5,7 @@ package com.wheel.common.enums.exception;
  * @author: zhouf
  * @date: 2020/6/9
  */
-public enum PublicBizCodeEnum {
+public enum BizCodeEnum {
 
     /**
      * 数据库处理异常
@@ -53,7 +53,7 @@ public enum PublicBizCodeEnum {
         this.msg = msg;
     }
 
-    PublicBizCodeEnum(String code, String msg) {
+    BizCodeEnum(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

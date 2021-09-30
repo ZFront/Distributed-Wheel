@@ -1,6 +1,6 @@
 package com.wheel.mq.listener;
 
-import com.wheel.common.constant.mq.P2PDestinations;
+import com.wheel.common.constant.mq.P2PDest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AmqMsgListener {
 
-    @JmsListener(destination = P2PDestinations.QUEUE_TEST)
+    @JmsListener(destination = P2PDest.QUEUE_TEST)
     public void resvQueueMsg(String msg) {
         log.info("queue消息接收：msg={}", msg);
     }

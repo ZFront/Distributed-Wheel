@@ -1,6 +1,6 @@
 package com.wheel.timer.job.core;
 
-import com.wheel.common.enums.exception.PublicBizCodeEnum;
+import com.wheel.common.enums.exception.BizCodeEnum;
 import com.wheel.common.enums.timer.JobTypeEnum;
 import com.wheel.common.enums.timer.TimeUnitEnum;
 import com.wheel.common.exception.BizException;
@@ -241,7 +241,7 @@ public class JobManager {
                     .withDescription(task.getJobDesc())
                     .withSchedule(cronScheduleBuilder);
         } else {
-            throw new BizException(PublicBizCodeEnum.BIZ_INVALID.getCode(), "未知的任务类型");
+            throw new BizException(BizCodeEnum.BIZ_INVALID.getCode(), "未知的任务类型");
         }
 
         // 设置开始时间、结束时间
