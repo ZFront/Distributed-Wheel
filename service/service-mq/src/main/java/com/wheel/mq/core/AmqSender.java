@@ -1,6 +1,6 @@
 package com.wheel.mq.core;
 
-import com.wheel.common.enums.mq.DestinationTypeEnum;
+import com.wheel.common.enums.mq.DestTypeEnum;
 import com.wheel.common.enums.mq.NotifyTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ScheduledMessage;
@@ -30,7 +30,7 @@ public class AmqSender {
      * @param msg        消息体
      */
     public void sendQueue(NotifyTypeEnum notifyType, String trxNo, String msg) {
-        this.send(notifyType, trxNo, msg, DestinationTypeEnum.QUEUE.getValue(), 0);
+        this.send(notifyType, trxNo, msg, DestTypeEnum.QUEUE.getValue(), 0);
     }
 
     /**
@@ -42,7 +42,7 @@ public class AmqSender {
      * @param delayTime  单位秒
      */
     public void sendDelayQueue(NotifyTypeEnum notifyType, String trxNo, String msg, int delayTime) {
-        this.send(notifyType, trxNo, msg, DestinationTypeEnum.QUEUE.getValue(), delayTime);
+        this.send(notifyType, trxNo, msg, DestTypeEnum.QUEUE.getValue(), delayTime);
     }
 
     /**
@@ -53,7 +53,7 @@ public class AmqSender {
      * @param msg        消息体
      */
     public void sendTopic(NotifyTypeEnum notifyType, String trxNo, String msg) {
-        this.send(notifyType, trxNo, msg, DestinationTypeEnum.TOPIC.getValue(), 0);
+        this.send(notifyType, trxNo, msg, DestTypeEnum.TOPIC.getValue(), 0);
     }
 
 
@@ -66,13 +66,13 @@ public class AmqSender {
      * @param delayTime  单位秒
      */
     public void sendTopic(NotifyTypeEnum notifyType, String trxNo, String msg, int delayTime) {
-        this.send(notifyType, trxNo, msg, DestinationTypeEnum.TOPIC.getValue(), delayTime);
+        this.send(notifyType, trxNo, msg, DestTypeEnum.TOPIC.getValue(), delayTime);
     }
 
     private void send(NotifyTypeEnum notifyType, String trxNo, String msg, int destinationType, int delayTime) {
         log.info("trxNo={} sendMq , notifyType={}, msg={}, destinationType={}, delayTime={}", trxNo, notifyType.getDesc(), msg, destinationType, delayTime);
         try {
-            if (DestinationTypeEnum.TOPIC.getValue() == destinationType) {
+            if (DestTypeEnum.TOPIC.getValue() == destinationType) {
                 jmsTemplate.convertAndSend(new ActiveMQTopic(notifyType.getDestination()), msg,
                         postProcessor -> {
                             postProcessor.setIntProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delayTime * 1000);
