@@ -5,12 +5,12 @@ import com.wheel.common.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.jedis.JedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import redis.clients.jedis.GeoCoordinate;
+import redis.clients.jedis.GeoRadiusResponse;
+import redis.clients.jedis.GeoUnit;
 import redis.clients.jedis.Tuple;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @description redis操作类
@@ -498,4 +498,75 @@ public class RedisClient {
         }
     }
     // ========================= Set操作 end ================================
+
+    // ========================= GEO 操作 start ================================
+
+    /**
+     * 添加 geo 元素
+     *
+     * @param key
+     * @param longitude
+     * @param latitude
+     * @param member    成员
+     * @return
+     */
+    public Long geoadd(String key, double longitude, double latitude, String member) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().geoadd(key, longitude, latitude, member);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 添加geo元素
+     *
+     * @param key
+     * @param map
+     * @return
+     */
+    public Long geoadd(String key, Map<String, GeoCoordinate> map) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().geoadd(key, map);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 获取直线距离
+     *
+     * @param key
+     * @param member1
+     * @param member2
+     * @return
+     */
+    public Double geodist(String key, String member1, String member2, GeoUnit unit) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().geodist(key, member1, member2, unit);
+        } finally {
+            conn.close();
+        }
+    }
+
+    /**
+     * 查找半径内存在的 member
+     *
+     * @param key
+     * @param member
+     * @param radius 半径
+     * @param unit   范围单位
+     * @return
+     */
+    public List<GeoRadiusResponse> georadiusByMember(String key, String member, double radius, GeoUnit unit) {
+        JedisConnection conn = getJedisConnection();
+        try {
+            return conn.getJedis().georadiusByMemberReadonly(key, member, radius, unit);
+        } finally {
+            conn.close();
+        }
+    }
 }

@@ -21,29 +21,33 @@ spring-cloud-gateway +  hystrix
 
 实现了常用的网关功能，比如验参、分发、限流、熔断等功能。
 
-
-
 [分布式限流](https://www.yuque.com/zfront/rb6xfk/rz7b16)
 
+## service 包
 
+### service-db
 
-## service-lock
+基于sharding-jdbc做的分库分表服务
 
-实现 zk锁，数据库锁，redis锁
+### service-lock
 
+实现zk锁（CuratorFramework 实现）
 
+数据库锁
+
+redis锁 （Redisson 实现）
 
 [分布式锁](https://www.yuque.com/zfront/rb6xfk/ibgyls)
 
+### service-message
 
+//TODO 实现邮件、短信等发送
 
-## service-mq
+### service-mq
 
 实现ActiveMQ、 RocketMQ基本收发功能
 
 针对ActiveMQ做了一个扩展。
-
-
 
 ActiveMQ健壮性监控：
 
@@ -54,19 +58,11 @@ ActiveMQ健壮性监控：
 - broker消息积压的监控
 - 无消费者队列的监控
 
-
-
 ActiveMQ扩展消息轨迹功能：
-
-//TODO
-
-
 
 [MQ高可用](https://www.yuque.com/zfront/rb6xfk/mt1cxr)
 
-
-
-## service-redis
+### service-redis
 
 实现redis常用操作、redis分布式限流器
 
@@ -75,25 +71,33 @@ ActiveMQ扩展消息轨迹功能：
 [Redis高可用](https://www.yuque.com/zfront/rb6xfk/pk9xrk)
 
 
+### service-timer
 
-## service-timer
-
-quartz
-
-实现通用定时器任务
+基于 quartz 实现通用定时器任务
 
 [定时器设计](https://www.yuque.com/zfront/rb6xfk/hc6r43)
 
+### service-unique
 
-
-## service-unique
-
-基于美团leaf实现的分布式ID
+基于美团 leaf 实现的分布式ID
 
 [分布式ID](https://www.yuque.com/go/doc/19449079)
 
-
-
-## test-demo
+## demo 包
 
 对一些例子的测试
+
+## learn 包
+
+### learn-algorithm
+
+一些算法题
+
+### learn-basis
+
+一些 JDK API 的使用
+
+### learn-middleware
+
+//TODO 一些中间件的使用 
+

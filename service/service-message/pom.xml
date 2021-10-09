@@ -17,6 +17,12 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- JavaMail -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- 业务包 -->
         <dependency>
             <groupId>com.wheel</groupId>

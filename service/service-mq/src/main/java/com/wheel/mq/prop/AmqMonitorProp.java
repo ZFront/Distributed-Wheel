@@ -16,9 +16,9 @@ import java.util.List;
 public class AmqMonitorProp {
 
     /**
-     * 是否开启监控
+     * 是否开启监控, 默认为 false
      */
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     /**
      * 扫描集群的间隔时间
