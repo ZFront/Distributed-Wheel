@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.wheel.unique.config.UniqueConfig
+com.wheel.service.unique.config.UniqueConfig

@@ -18,7 +18,7 @@ actuator 监控
 
 ## 方法说明
 
-test-demo：com.wheel.demo.controller.DemoApiController
+test-demo：DemoApiController
 
 
 

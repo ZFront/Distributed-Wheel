@@ -33,4 +33,4 @@ dependency-reduced-pom.xml
 .git/
 node_modules
 
-log
+logdemo\

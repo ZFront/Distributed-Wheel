@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wheel.lock.entity.Locker">
+<mapper namespace="com.wheel.service.lock.entity.Locker">
     <sql id="table"> tbl_locker </sql>
 
     <!-- 用于返回的bean对象 -->
-    <resultMap id="BaseResultMap" type="com.wheel.lock.entity.Locker">
+    <resultMap id="BaseResultMap" type="com.wheel.service.lock.entity.Locker">
         <result column="ID" property="id" jdbcType="BIGINT"/>
         <result column="VERSION" property="version" jdbcType="BIGINT"/>
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
@@ -31,7 +31,7 @@
     </sql>
 
     <!-- 插入记录 -->
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.wheel.lock.entity.Locker">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.wheel.service.lock.entity.Locker">
         INSERT INTO
         <include refid="table"/>
         (
@@ -84,7 +84,7 @@
     </insert>
 
     <!--更新-->
-    <update id="update" parameterType="com.wheel.lock.entity.Locker">
+    <update id="update" parameterType="com.wheel.service.lock.entity.Locker">
         UPDATE
         <include refid="table"/>
         SET
@@ -100,7 +100,7 @@
     </update>
 
     <!-- 只更新不为null的属性 -->
-    <update id="updateIfNotNull" parameterType="com.wheel.lock.entity.Locker">
+    <update id="updateIfNotNull" parameterType="com.wheel.service.lock.entity.Locker">
         UPDATE
         <include refid="table"/>
         <set>

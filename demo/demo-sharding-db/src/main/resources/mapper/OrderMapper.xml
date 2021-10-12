@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wheel.demo.sharding.entity.Order">
+<mapper namespace="com.wheel.demo.test.sharding.entity.Order">
     <sql id="table"> t_order </sql>
 
     <!-- 用于返回的bean对象 -->
-    <resultMap id="BaseResultMap" type="com.wheel.demo.sharding.entity.Order">
+    <resultMap id="BaseResultMap" type="com.wheel.demo.test.sharding.entity.Order">
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="COMPLETE_TIME" property="completeTime" jdbcType="TIMESTAMP"/>
         <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
@@ -26,7 +26,7 @@
     </sql>
 
     <!-- 插入记录 -->
-    <insert id="insert" useGeneratedKeys="true" keyProperty="orderNo" parameterType="com.wheel.demo.sharding.entity.Order">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderNo" parameterType="com.wheel.demo.test.sharding.entity.Order">
         INSERT INTO
         <include refid="table"/>
         (
@@ -71,7 +71,7 @@
     </insert>
 
     <!--更新-->
-    <update id="update" parameterType="com.wheel.demo.sharding.entity.Order">
+    <update id="update" parameterType="com.wheel.demo.test.sharding.entity.Order">
         UPDATE
         <include refid="table"/>
         SET
@@ -85,7 +85,7 @@
     </update>
 
     <!-- 只更新不为null的属性 -->
-    <update id="updateIfNotNull" parameterType="com.wheel.demo.sharding.entity.Order">
+    <update id="updateIfNotNull" parameterType="com.wheel.demo.test.sharding.entity.Order">
         UPDATE
         <include refid="table"/>
         <set>

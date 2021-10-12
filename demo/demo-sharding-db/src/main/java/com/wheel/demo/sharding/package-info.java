@@ -1,4 +1,0 @@
-/**
- * sharding-jdbc demo项目
- */
-package com.wheel.demo.sharding;
