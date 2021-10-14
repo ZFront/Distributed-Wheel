@@ -49,6 +49,7 @@
         <curator.version>4.3.0</curator.version>
         <perf4j.version>0.9.16</perf4j.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <java-jwt.version>3.10.2</java-jwt.version>
 
     </properties>
 
@@ -236,6 +237,11 @@
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
