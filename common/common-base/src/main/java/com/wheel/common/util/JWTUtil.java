@@ -59,7 +59,7 @@ public class JWTUtil {
     }
 
     /**
-     * 验证jwt，并返回数据
+     * 验证jwt，并返回对应的附加信息
      *
      * @param token     待验证的token
      * @param secretKey 密钥
