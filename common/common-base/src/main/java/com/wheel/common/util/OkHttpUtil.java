@@ -21,14 +21,14 @@ public class OkHttpUtil {
     private static OkHttpClient httpClient = getOkHttpsClient();
 
     public static String getSync(String url, Map<String, String> header, Map<String, String> param) throws Exception {
-        if(param != null){
-            int i=0, len = param.size();
-            for(Map.Entry<String, String> entry : param.entrySet()){
-                if(i==0){
+        if (param != null) {
+            int i = 0, len = param.size();
+            for (Map.Entry<String, String> entry : param.entrySet()) {
+                if (i == 0) {
                     url += "?";
                 }
                 url += entry.getKey() + "=" + entry.getValue();
-                if(i < len-1){
+                if (i < len - 1) {
                     url += "&";
                 }
                 i++;
@@ -55,7 +55,7 @@ public class OkHttpUtil {
      */
     public static String postFromSync(String url, Map<String, String> header, Map<String, String> param) throws Exception {
         FormBody.Builder bodBuilder = new FormBody.Builder();
-        for(Map.Entry<String, String> entry : param.entrySet()){
+        for (Map.Entry<String, String> entry : param.entrySet()) {
             bodBuilder.add(entry.getKey(), entry.getValue());
         }
         RequestBody body = bodBuilder.build();
@@ -96,8 +96,8 @@ public class OkHttpUtil {
     public static String postJsonSync(String url, Map<String, String> header, String json) throws Exception {
         final RequestBody requestBody = RequestBody.create(JSON_TYPE, json);
         Request.Builder builder = new Request.Builder();
-        if(header != null && !header.isEmpty()){
-            for(Map.Entry<String, String> entry : header.entrySet()){
+        if (header != null && !header.isEmpty()) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
                 builder.header(entry.getKey(), entry.getValue());
             }
         }
@@ -138,9 +138,11 @@ public class OkHttpUtil {
     public static OkHttpClient getOkHttpsClient() {
         try {
             final X509TrustManager trustManager = new X509TrustManager() {
+                @Override
                 public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
                 }
 
+                @Override
                 public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
                     if (chain == null) {
                         throw new IllegalArgumentException("checkServerTrusted: X509Certificate array is null");
@@ -159,6 +161,7 @@ public class OkHttpUtil {
                     }
                 }
 
+                @Override
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                     return new java.security.cert.X509Certificate[]{};
                 }
@@ -172,6 +175,7 @@ public class OkHttpUtil {
             builder.sslSocketFactory(sslSocketFactory, trustManager);
             builder.proxy(Proxy.NO_PROXY); //不使用代理，避免被第三方使用代理抓包
             builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
                 public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }
@@ -198,26 +202,17 @@ public class OkHttpUtil {
         }
     }
 
-    private static void addHeader(Request.Builder builder, Map<String, String> header){
-        if(header == null || header.isEmpty()){
+    private static void addHeader(Request.Builder builder, Map<String, String> header) {
+        if (header == null || header.isEmpty()) {
             return;
         }
-        for(Map.Entry<String, String> entry : header.entrySet()){
+        for (Map.Entry<String, String> entry : header.entrySet()) {
             builder.header(entry.getKey(), entry.getValue());
         }
     }
 
     private static String getRespBodyAndClose(Response response) throws Exception {
-//        if(! response.isSuccessful()){
-//            String errMsg = "request fail, code:" + response.code() + ",message:" + response.message();
-//            try{
-//                response.close();
-//            }catch(Exception e){ }
-//
-//            throw new RuntimeException(errMsg);
-//        }
-
-        try{
+        try {
             return response.body().string();
         } finally {
             response.close();

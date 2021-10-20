@@ -287,6 +287,10 @@ public class JsonUtil {
         return false;
     }
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * 把一些数据类型转为String的序列化类
      */
@@ -305,7 +309,6 @@ public class JsonUtil {
             out.writeString(object.toString());
         }
     }
-
 
     /**
      * 校验一个字符串是否是合法的JSON格式的类
@@ -529,10 +532,5 @@ public class JsonUtil {
             System.out.printf("type: %s, col: %s%s", type, col, System.getProperty("line.separator"));
             return false;
         }
-    }
-
-
-    public static void main(String[] args) {
-
     }
 }

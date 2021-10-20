@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 
 public class ClassUtil {
     private static ClassLoader classLoader;
+
     static {
         classLoader = Thread.currentThread().getContextClassLoader();
     }
@@ -23,7 +24,7 @@ public class ClassUtil {
         //返回表示此 Class 所表示的实体（类、接口、基本类型、void）的直接超类的 Type。
         Type genType = clazz.getGenericSuperclass();
 
-        if (! (genType instanceof ParameterizedType)) {
+        if (!(genType instanceof ParameterizedType)) {
             return Object.class;
         }
 

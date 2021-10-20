@@ -24,9 +24,7 @@ public class MD5Util {
             if (StringUtil.isNotEmpty(str)) {
                 messageDigest.update(str.getBytes("UTF-8"));
             }
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("生成MD5信息时异常", e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException("生成MD5信息时异常", e);
         }
         return messageDigest.digest();

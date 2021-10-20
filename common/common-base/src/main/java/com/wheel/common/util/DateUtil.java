@@ -206,7 +206,8 @@ public class DateUtil {
 
     /**
      * 得到day的终止时间点.
-     *currentTime
+     * currentTime
+     *
      * @param date
      * @return
      */
@@ -215,7 +216,7 @@ public class DateUtil {
         return dateTime.withTime(23, 59, 59, 999).toDate();
     }
 
-    public static long secondToMillSecond(int seconds){
+    public static long secondToMillSecond(int seconds) {
         return seconds * 1000L; //此处把秒乘以1000转成毫秒时一定要是Long型的1000，否则会使时间变小
     }
 
