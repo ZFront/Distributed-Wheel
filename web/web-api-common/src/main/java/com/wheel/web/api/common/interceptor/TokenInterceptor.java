@@ -1,6 +1,7 @@
 package com.wheel.web.api.common.interceptor;
 
 import com.wheel.common.exception.BizException;
+import com.wheel.web.api.common.config.WebApiProp;
 import com.wheel.web.api.common.constant.WebKey;
 import com.wheel.web.api.common.kit.TokenManager;
 import lombok.extern.slf4j.Slf4j;

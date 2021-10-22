@@ -6,17 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @desc 无需鉴权标识
+ * @desc 免鉴权 tag
  * @author: zhouf
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Auth {
+public @interface NotAuth {
 
-    /**
-     * 权限标识
-     *
-     * @return
-     */
-    String value();
 }
