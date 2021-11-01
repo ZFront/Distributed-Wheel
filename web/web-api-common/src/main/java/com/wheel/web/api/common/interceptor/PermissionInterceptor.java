@@ -1,6 +1,5 @@
 package com.wheel.web.api.common.interceptor;
 
-import com.wheel.web.api.common.annotation.NotAuth;
 import com.wheel.web.api.common.annotation.Permission;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.debug("AuthInterceptor start ...");
+        log.debug("PermissionInterceptor start ...");
         if (!(handler instanceof HandlerMethod)) {
             log.error("{}：handler type is not support !", handler.getClass().getName());
             return false;
