@@ -5,6 +5,7 @@ import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
  * @desc 路径和是否等于一个数
+ * {@link https://leetcode-cn.com/problems/path-sum/}
  * @author: zhouf
  */
 public class ID112 {

@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.linklist;
 import com.wheel.common.util.JsonUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/merge-two-sorted-lists/description/}
+ * @desc 合并两个有序链表
+ * {@link https://leetcode-cn.com/problems/merge-two-sorted-lists/description/}
  * @author: zhouf
  */
 public class ID21 {

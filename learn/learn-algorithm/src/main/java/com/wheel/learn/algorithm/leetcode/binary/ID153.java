@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.binary;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/description/}
+ * @desc 寻找旋转排序数组中的最小值
+ * {@link https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/description/}
  * @author: zhouf
  */
 public class ID153 {

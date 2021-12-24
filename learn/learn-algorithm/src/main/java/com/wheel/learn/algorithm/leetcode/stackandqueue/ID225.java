@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/implement-stack-using-queues/description/}
+ * @desc 用队列实现栈
+ * {@link https://leetcode-cn.com/problems/implement-stack-using-queues/description/}
  * @author: zhouf
  */
 public class ID225 {

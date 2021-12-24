@@ -4,7 +4,8 @@ import com.wheel.learn.algorithm.common.TreeNode;
 import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
- * @desc
+ * @desc 是否平衡二叉树
+ * {@link https://leetcode-cn.com/problems/balanced-binary-tree/}
  * @author: zhouf
  */
 public class ID110 {

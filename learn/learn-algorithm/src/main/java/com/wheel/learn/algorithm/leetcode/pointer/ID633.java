@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.pointer;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/sum-of-square-numbers/description/}
+ * @desc 平方数之和
+ * {@link https://leetcode-cn.com/problems/sum-of-square-numbers/description/}
  * @author: zhouf
  */
 public class ID633 {

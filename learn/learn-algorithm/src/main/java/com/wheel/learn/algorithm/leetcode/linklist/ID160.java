@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.linklist;
 import com.wheel.common.util.JsonUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/}
+ * @desc 相交链表
+ * {@link https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/}
  * @author: zhouf
  */
 public class ID160 {

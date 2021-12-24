@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.sort;
 import java.util.*;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/sort-characters-by-frequency/description/}
+ * @desc 字符出现过的顺序排序
+ * {@link https://leetcode-cn.com/problems/sort-characters-by-frequency/description/}
  * @author: zhouf
  */
 public class ID451 {

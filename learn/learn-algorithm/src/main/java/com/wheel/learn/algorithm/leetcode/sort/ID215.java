@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/kth-largest-element-in-an-array/description/}
+ * @desc 数组中的第K个最大元素
+ * {@link https://leetcode-cn.com/problems/kth-largest-element-in-an-array/description/}
  * @author: zhouf
  */
 public class ID215 {

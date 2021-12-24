@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.binary;
 import com.wheel.common.util.JsonUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/}
+ * @desc 在排序数组中查找元素的第一个和最后一个位置
+ * {@link https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/}
  * @author: zhouf
  */
 public class ID34 {

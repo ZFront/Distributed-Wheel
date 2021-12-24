@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/single-element-in-a-sorted-array/description/}
+ * @desc 有序数组中的单一元素
+ * {@link https://leetcode-cn.com/problems/single-element-in-a-sorted-array/description/}
  * @author: zhouf
  */
 public class ID540 {

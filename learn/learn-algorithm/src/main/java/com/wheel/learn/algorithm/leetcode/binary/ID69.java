@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.binary;
 
 /**
- * @desc
+ * @desc Sqrt(x)
+ * {@link https://leetcode-cn.com/problems/sqrtx/}
  * @author: zhouf
  */
 public class ID69 {

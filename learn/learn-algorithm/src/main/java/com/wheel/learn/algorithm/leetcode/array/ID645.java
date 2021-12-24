@@ -5,7 +5,8 @@ import com.wheel.common.util.JsonUtil;
 import java.util.Arrays;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/set-mismatch/description/}
+ * @desc 错误的集合
+ * {@link https://leetcode-cn.com/problems/set-mismatch/description/}
  * @author: zhouf
  */
 public class ID645 {

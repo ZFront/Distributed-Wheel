@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.pointer;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/merge-sorted-array/description/}
+ * @desc 合并有序列表
+ * {@link https://leetcode-cn.com/problems/merge-sorted-array/description/}
  * @author: zhouf
  */
 public class ID88 {

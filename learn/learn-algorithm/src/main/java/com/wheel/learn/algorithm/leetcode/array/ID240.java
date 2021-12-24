@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.array;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/}
+ * @desc 搜索二维矩阵 II
+ * {@link https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/}
  * @author: zhouf
  */
 public class ID240 {

@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.string;
 import java.util.Arrays;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/valid-anagram/description/}
+ * @desc 有效的字母异位词
+ * {@link https://leetcode-cn.com/problems/valid-anagram/description/}
  * @author: zhouf
  */
 public class ID242 {

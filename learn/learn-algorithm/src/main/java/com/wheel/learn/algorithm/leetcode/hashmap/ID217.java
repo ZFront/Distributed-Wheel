@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.hashmap;
 import java.util.HashMap;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/contains-duplicate/description/}
+ * @desc 存在重复的元素
+ * {@link https://leetcode-cn.com/problems/contains-duplicate/description/}
  * @author: zhouf
  */
 public class ID217 {

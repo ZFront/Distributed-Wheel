@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.linklist;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/}
+ * @desc 删除链表的倒数第N个节点
+ * {@link https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/}
  * @author: zhouf
  */
 public class ID19 {

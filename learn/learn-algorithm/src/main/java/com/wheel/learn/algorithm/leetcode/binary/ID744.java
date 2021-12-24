@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.binary;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target/description/}
+ * @desc 寻找比目标字幕大的最小字母
+ * {@link https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target/description/}
  * @author: zhouf
  */
 public class ID744 {

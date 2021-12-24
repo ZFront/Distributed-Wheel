@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.stackandqueue;
 import java.util.Stack;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/min-stack/description/}
+ * @desc 最小栈
+ * {@link https://leetcode-cn.com/problems/min-stack/description/}
  * @author: zhouf
  */
 public class ID155 {

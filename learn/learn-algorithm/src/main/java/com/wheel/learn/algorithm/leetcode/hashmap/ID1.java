@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/two-sum/description/}
+ * @desc 两数之和
+ * {@link https://leetcode-cn.com/problems/two-sum/description/}
  * @author: zhouf
  */
 public class ID1 {

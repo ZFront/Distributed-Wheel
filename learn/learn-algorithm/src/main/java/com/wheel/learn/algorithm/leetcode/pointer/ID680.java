@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.pointer;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/valid-palindrome-ii/description/}
+ * @desc 验证回文字符串 Ⅱ
+ * {@link https://leetcode-cn.com/problems/valid-palindrome-ii/description/}
  * @author: zhouf
  */
 public class ID680 {

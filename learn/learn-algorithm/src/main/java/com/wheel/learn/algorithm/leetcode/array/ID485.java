@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.array;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/max-consecutive-ones/description/}
+ * @desc 最大连续1的个数
+ * {@link https://leetcode-cn.com/problems/max-consecutive-ones/description/}
  * @author: zhouf
  */
 public class ID485 {

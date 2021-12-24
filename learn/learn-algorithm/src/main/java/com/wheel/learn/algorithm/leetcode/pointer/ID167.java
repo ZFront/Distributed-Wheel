@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.pointer;
 import com.wheel.common.util.JsonUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/}
+ * @desc 两数之和 II - 输入有序数组
+ * {@link https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/}
  * @author: zhouf
  */
 public class ID167 {

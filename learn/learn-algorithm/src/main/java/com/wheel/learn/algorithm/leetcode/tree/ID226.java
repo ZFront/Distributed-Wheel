@@ -4,7 +4,8 @@ import com.wheel.learn.algorithm.common.TreeNode;
 import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
- * @desc
+ * @desc 翻转二叉树
+ * {@link https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/}
  * @author: zhouf
  */
 public class ID226 {

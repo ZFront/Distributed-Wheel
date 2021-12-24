@@ -5,7 +5,8 @@ import com.google.common.collect.Maps;
 import java.util.HashMap;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/find-the-duplicate-number/description/}
+ * @desc 寻找重复数
+ * {@link https://leetcode-cn.com/problems/find-the-duplicate-number/description/}
  * @author: zhouf
  */
 public class ID287 {

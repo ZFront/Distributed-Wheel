@@ -4,7 +4,8 @@ import com.wheel.learn.algorithm.common.TreeNode;
 import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
- * @desc
+ * @desc 二叉树的直径
+ * {@link https://leetcode-cn.com/problems/diameter-of-binary-tree/}
  * @author: zhouf
  */
 public class ID543 {

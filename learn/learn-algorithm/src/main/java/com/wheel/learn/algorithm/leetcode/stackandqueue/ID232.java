@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.stackandqueue;
 import java.util.Stack;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/implement-queue-using-stacks/description/}
+ * @desc 用栈实现队列
+ * {@link https://leetcode-cn.com/problems/implement-queue-using-stacks/description/}
  * 栈：后进先出
  * 队列：先进先出
  * @author: zhouf

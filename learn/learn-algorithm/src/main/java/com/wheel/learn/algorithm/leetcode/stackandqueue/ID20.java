@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.stackandqueue;
 import java.util.Stack;
 
 /**
- * @desc
+ * @desc 有效的括号
+ * {@link https://leetcode-cn.com/problems/valid-parentheses/}
  * @author: zhouf
  */
 public class ID20 {

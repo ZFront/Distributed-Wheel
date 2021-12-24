@@ -1,7 +1,8 @@
 package com.wheel.learn.algorithm.leetcode.linklist;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/}
+ * @desc 删除连表中重复的元素
+ * {@link https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/}
  * @author: zhouf
  */
 public class ID83 {
@@ -37,5 +38,4 @@ public class ID83 {
         }
         return head;
     }
-
 }

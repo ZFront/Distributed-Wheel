@@ -3,7 +3,8 @@ package com.wheel.learn.algorithm.leetcode.array;
 import com.wheel.common.util.JsonUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/move-zeroes/description/}
+ * @desc 移动零
+ * {@link https://leetcode-cn.com/problems/move-zeroes/description/}
  * @author: zhouf
  */
 public class ID283 {

@@ -5,7 +5,8 @@ import com.wheel.learn.algorithm.common.TreeNode;
 import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
- * @desc {@link https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/description/}
+ * @desc 二叉树的最大深度
+ * {@link https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/description/}
  * @author: zhouf
  */
 public class ID104 {
