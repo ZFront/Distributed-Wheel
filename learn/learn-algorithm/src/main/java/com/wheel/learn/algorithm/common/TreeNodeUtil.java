@@ -25,17 +25,17 @@ public class TreeNodeUtil {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         boolean isLeft = true;
-        for (Integer treeNode : array) {
+        for (int i = 1; i < array.length; i++) {
             TreeNode node = queue.peek();
             if (isLeft) {
-                if (treeNode != null) {
-                    node.left = new TreeNode(treeNode);
+                if (array[i] != null) {
+                    node.left = new TreeNode(array[i]);
                     queue.offer(node.left);
                 }
                 isLeft = false;
             } else {
-                if (treeNode != null) {
-                    node.right = new TreeNode(treeNode);
+                if (array[i] != null) {
+                    node.right = new TreeNode(array[i]);
                     queue.offer(node.right);
                 }
                 // 移除第一个节点

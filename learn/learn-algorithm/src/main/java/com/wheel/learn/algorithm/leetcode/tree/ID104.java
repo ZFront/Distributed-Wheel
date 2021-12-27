@@ -17,6 +17,10 @@ public class ID104 {
         TreeNodeUtil.show(root);
 
         System.out.println(maxDepth(root));
+
+        System.out.println(leftDepth(root));
+
+        System.out.println(rightDepth(root));
     }
 
     /**
@@ -31,6 +35,24 @@ public class ID104 {
         if (root == null) {
             return 0;
         }
-        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        return Math.max(left, right) + 1;
+    }
+
+    public static int leftDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = maxDepth(root.left);
+        return left + 1;
+    }
+
+    public static int rightDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int right = maxDepth(root.right);
+        return right + 1;
     }
 }

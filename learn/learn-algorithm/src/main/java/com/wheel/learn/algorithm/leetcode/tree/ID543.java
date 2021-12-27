@@ -20,12 +20,6 @@ public class ID543 {
         System.out.println("最大直径为：" + diameterOfBinaryTree(tree));
     }
 
-    /**
-     * 查找最大直径。其实本质就是
-     *
-     * @param root
-     * @return
-     */
     public static int diameterOfBinaryTree(TreeNode root) {
         depth(root);
         return max;

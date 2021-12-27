@@ -5,7 +5,7 @@ import com.wheel.learn.algorithm.common.TreeNodeUtil;
 
 /**
  * @desc 翻转二叉树
- * {@link https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/}
+ * {@link https://leetcode-cn.com/problems/invert-binary-tree/}
  * @author: zhouf
  */
 public class ID226 {
